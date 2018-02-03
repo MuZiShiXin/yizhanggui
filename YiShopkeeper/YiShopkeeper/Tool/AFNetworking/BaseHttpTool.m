@@ -101,11 +101,12 @@
     [session setDownloadTaskDidResumeBlock:^(NSURLSession * _Nonnull session, NSURLSessionDownloadTask * _Nonnull downloadTask, int64_t fileOffset, int64_t expectedTotalBytes) {
     }];
     
-
+    NSLog(@"-----------------HTTP:-----------------/n%@",url);
     [session GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        NSLog(@"%@",responseObject);
 
         if (success) {
                 success(responseObject);
@@ -128,11 +129,13 @@
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     [session.requestSerializer setTimeoutInterval:45];
     session.responseSerializer.acceptableContentTypes = nil;
-   
+    NSLog(@"-----------------HTTP:-----------------/n%@",url);
     [session POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        NSLog(@"%@",responseObject);
+
         if (success) {
             success(responseObject);
         }

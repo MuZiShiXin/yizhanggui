@@ -154,8 +154,6 @@
 		1861C0FB1FCD8F1500291AB6 /* TheFourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1861C0FA1FCD8F1500291AB6 /* TheFourViewController.m */; };
 		1861C1091FCED7D500291AB6 /* TheRepairOrderSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1861C1071FCED7D500291AB6 /* TheRepairOrderSearchViewController.m */; };
 		1861C10A1FCED7D500291AB6 /* TheRepairOrderSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1861C1081FCED7D500291AB6 /* TheRepairOrderSearchViewController.xib */; };
-		1862D28820102B6200637556 /* YK_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1862D28620102B6200637556 /* YK_plus@2x.png */; };
-		1862D28920102B6200637556 /* YK_minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1862D28720102B6200637556 /* YK_minus@2x.png */; };
 		18776362201C723D006E20B2 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 18776361201C723D006E20B2 /* UIViewController+BackButtonHandler.m */; };
 		187F4AA61FC55DC400EF6055 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F4AA51FC55DC300EF6055 /* ForgetPasswordViewController.m */; };
 		187F4AA91FC55EAF00EF6055 /* ModificationPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F4AA81FC55EAF00EF6055 /* ModificationPWViewController.m */; };
@@ -593,8 +591,6 @@
 		1861C1061FCED7D500291AB6 /* TheRepairOrderSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheRepairOrderSearchViewController.h; sourceTree = "<group>"; };
 		1861C1071FCED7D500291AB6 /* TheRepairOrderSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheRepairOrderSearchViewController.m; sourceTree = "<group>"; };
 		1861C1081FCED7D500291AB6 /* TheRepairOrderSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TheRepairOrderSearchViewController.xib; sourceTree = "<group>"; };
-		1862D28620102B6200637556 /* YK_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YK_plus@2x.png"; path = "../../../../../../../Downloads/YK_plus@2x.png"; sourceTree = "<group>"; };
-		1862D28720102B6200637556 /* YK_minus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YK_minus@2x.png"; path = "../../../../../../../Downloads/YK_minus@2x.png"; sourceTree = "<group>"; };
 		18776360201C723D006E20B2 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		18776361201C723D006E20B2 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		187F4AA41FC55DC300EF6055 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
@@ -1053,8 +1049,6 @@
 		1842DE0F200F5FFC009CD6D1 /* YKMultiLevelTableView */ = {
 			isa = PBXGroup;
 			children = (
-				1862D28720102B6200637556 /* YK_minus@2x.png */,
-				1862D28620102B6200637556 /* YK_plus@2x.png */,
 				1842DE12200F5FFC009CD6D1 /* YKMultiLevelTableView.h */,
 				1842DE13200F5FFC009CD6D1 /* YKMultiLevelTableView.m */,
 				1842DE14200F5FFC009CD6D1 /* YKNodeModel.h */,
@@ -2357,7 +2351,6 @@
 				187F4B2E1FCCFBEC00EF6055 /* ChangeMyPasswordViewController.xib in Resources */,
 				184F00861FF00DE1003152CD /* more@2x.png in Resources */,
 				187F4B331FCD04AE00EF6055 /* LogoutAccountNumberViewController.xib in Resources */,
-				1862D28820102B6200637556 /* YK_plus@2x.png in Resources */,
 				184F00911FF00DE1003152CD /* white_circle@2x.png in Resources */,
 				184F00841FF00DE1003152CD /* grey@3x.png in Resources */,
 				187F4AFF1FCBAF5A00EF6055 /* EnterpriseInformationViewController.xib in Resources */,
@@ -2381,7 +2374,6 @@
 				181A7E8B1FDA81BF00358166 /* gongdanxiangqingView.xib in Resources */,
 				181A7E901FDA956500358166 /* DingDanGuiJiSViewController.xib in Resources */,
 				184F007E1FF00DE1003152CD /* change_direction@3x.png in Resources */,
-				1862D28920102B6200637556 /* YK_minus@2x.png in Resources */,
 				187F4B1C1FCC3B9B00EF6055 /* AboutUsViewController.xib in Resources */,
 				18C0C9E81FCFCDB800548D96 /* CancelOrderTableViewCell.xib in Resources */,
 				184F008C1FF00DE1003152CD /* team_red_check@2x.png in Resources */,

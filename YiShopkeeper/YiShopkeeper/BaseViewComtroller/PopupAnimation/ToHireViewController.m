@@ -413,6 +413,7 @@
     instructionsLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"666666"];
     instructionsLabel.text = @"手续费扣除说明";
     [instructionsButton addSubview:instructionsLabel];
+    [instructionsButton addTarget:self action:@selector(instructionsUpInside) forControlEvents:UIControlEventTouchUpInside];
     [bjScrollView addSubview:instructionsButton];
     
     //第四块
@@ -495,6 +496,18 @@
     bjScrollView.bounces = NO;
     [self.view addSubview:bjScrollView];
 }
+#pragma mark 提示
+- (void)instructionsUpInside
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"平台收费标准" message:@"按照成交订单每人次一元计算收取，不成交订单平台不扣除手续费" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        NSLog(@"action = %@", action);
+    }];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 
 -(void)scanBigImageClick:(UITapGestureRecognizer *)tap{
@@ -866,36 +879,30 @@
     if (headingsTextField.text.length == 0 || headingsTextField.text == nil) {
         [self showInfoWithTitle:@"标题不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
-
         return;
     }else if (occupationLabel.text.length == 0 || [occupationLabel.text isEqualToString:@"选择工种"])
     {
         [self showInfoWithTitle:@"工种不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
-
         return;
     }else if (peopleNumberTextField.text.length == 0 || peopleNumberTextField.text == nil)
     {
         [self showInfoWithTitle:@"用工人数不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
-
         return;
     }else if (![self inputShouldNumber:peopleNumberTextField.text]){
         [self showInfoWithTitle:@"用工人数为数字" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
-
         return;
     }else if ([[NSString stringWithFormat:@"%@",peopleNumberTextField.text] integerValue] <= 0)
     {
         [self showInfoWithTitle:@"人数不为0" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
-
         return;
     }else if (startTimeLabel.text.length == 0 || startTimeLabel.text == nil)
     {
         [self showInfoWithTitle:@"开始时间不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
-
         return;
     }else if (endTimeLabel.text.length == 0 || endTimeLabel.text == nil)
     {
@@ -923,11 +930,6 @@
     }else if ([addressLabel.text isEqualToString:@"请选择工作地点"])
     {
         [self showInfoWithTitle:@"请选择工作地点" autoCloseTime:2];
-        btn.userInteractionEnabled = YES;
-        return;
-    }else if (phone.length == 0 || phone == nil)
-    {
-        [self showInfoWithTitle:@"内容不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
         return;
     }else if(_dicAry.count < 2)

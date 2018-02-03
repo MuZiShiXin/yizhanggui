@@ -22,17 +22,18 @@
     
 //    CGRect rect = self.view.frame;
     CGRect frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64);
-    YKMultiLevelTableView *mutableTable = [[YKMultiLevelTableView alloc] initWithFrame:frame
-                                                                                 nodes:[self returnData]
-                                                                            rootNodeID:@""
-                                                                      needPreservation:YES
-                                                                           selectBlock:^(YKNodeModel *node) {
-                                                                               NSLog(@"--select node name=%@", node.workType);
-                                                                               if (_block != nil) {
-                                                                                   _block(node.workType);
-                                                                               }
-                                                                        [self.navigationController popViewControllerAnimated: YES];
-                                                                           }];
+    YKMultiLevelTableView *mutableTable = [[YKMultiLevelTableView alloc]
+        initWithFrame:frame
+                nodes:[self returnData]
+           rootNodeID:@""
+     needPreservation:YES
+          selectBlock:^(YKNodeModel *node) {
+        NSLog(@"--select node name=%@", node.workType);
+        if (_block != nil) {
+                _block(node.workType);
+        }
+    [self.navigationController popViewControllerAnimated: YES];
+    }];
     [self.view addSubview:mutableTable];
     
 }

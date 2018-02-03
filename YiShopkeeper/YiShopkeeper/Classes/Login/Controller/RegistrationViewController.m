@@ -292,6 +292,7 @@
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:userPhone.text,@"phone", nil];
     [BaseHttpTool GET:urlStr params:parameters success:^(id  _Nullable responseObj) {
+        NSLog(@"%@",responseObj);
         if ([responseObj objectForKey:@"result"]) {
             NSLog(@"验证码发送成功");
             [self showRightWithTitle:@"验证码发送成功" autoCloseTime:2];

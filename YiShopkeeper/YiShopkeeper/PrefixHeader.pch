@@ -60,7 +60,7 @@
 //#define kPRTURL @"http://39.106.12.254:18080" // 本地局域网
 //#define kPRTURL @"http://192.168.0.114:18080" // 李海龙
 //#define kPRTURL @"http://192.168.1.14:18080" // 于庆涛
-#define kPRTURL @"http://pshop.pbphkj.com:81"
+
 //#ifdef __OBJC__
 //#ifdef DEBUG
 //#define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
