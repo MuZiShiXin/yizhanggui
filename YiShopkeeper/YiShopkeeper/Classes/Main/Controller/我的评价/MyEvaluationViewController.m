@@ -104,7 +104,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self httpRequest];
+    
 }
 
 - (void)viewDidLoad {
@@ -112,6 +112,8 @@
     self.titelLabel.text = @"我的评价";
     self.CoutPage = 1;
     isOpen = YES;
+    [self httpRequest];
+
     // Do any additional setup after loading the view.
 //    self.mainTableView.rowHeight = UITableViewAutomaticDimension; // 自适应单元格高度
 //    self.mainTableView.estimatedRowHeight = 266; //先估计一个高度
@@ -120,6 +122,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    [tableView tableViewDisplayWitMsg:@"暂无工单" ifNecessaryForRowCount:_ModelDic.count];
     return self.ModelDic.count;
 }
 

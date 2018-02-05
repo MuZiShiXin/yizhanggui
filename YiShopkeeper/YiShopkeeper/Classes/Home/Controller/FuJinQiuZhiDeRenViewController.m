@@ -109,7 +109,7 @@
     [self.view addSubview:imageView];
     
     UILabel *label = [[UILabel alloc]init];
-    label.text = [NSString stringWithFormat:@"需要%@人  已报",@"30"];
+    label.text = [NSString stringWithFormat:@"需要%ld人  已报",self.recruitNum];
     label.font = [UIFont systemFontOfSize:13];
     label.textColor = [UIColor hx_colorWithHexRGBAString:@"666666"];
     CGFloat width = [UILabel getWidthWithTitle:label.text font:label.font];
@@ -119,7 +119,7 @@
     UILabel *RegistrationNumberLabel = [[UILabel alloc]init];
     RegistrationNumberLabel.textColor = [UIColor redColor];
     RegistrationNumberLabel.font = [UIFont systemFontOfSize:13];
-    RegistrationNumberLabel.text = @"20人";
+    RegistrationNumberLabel.text = [NSString stringWithFormat:@"%ld人",self.appliedPeoNum];
     CGFloat width1 = [UILabel getWidthWithTitle:RegistrationNumberLabel.text font:RegistrationNumberLabel.font];
     RegistrationNumberLabel.frame = CGRectMake(CGRectGetMaxX(label.frame)+5, 80, width1, 13);
     [self.view addSubview:RegistrationNumberLabel];
@@ -135,8 +135,8 @@
     UILabel *RenNumberLabel = [[UILabel alloc]init];
     RenNumberLabel.textColor = [UIColor redColor];
     RenNumberLabel.font = [UIFont systemFontOfSize:13];
-    RenNumberLabel.text = @"20人";
-    CGFloat width3 = [UILabel getWidthWithTitle:RegistrationNumberLabel.text font:RegistrationNumberLabel.font];
+    RenNumberLabel.text = [NSString stringWithFormat:@"%ld人",self.lastPeoNum];
+    CGFloat width3 = [UILabel getWidthWithTitle:RenNumberLabel.text font:RenNumberLabel.font];
     RenNumberLabel.frame = CGRectMake(CGRectGetMaxX(remainingAndacceptance.frame)+5, 80, width3, 13);
     [self.view addSubview:RenNumberLabel];
     

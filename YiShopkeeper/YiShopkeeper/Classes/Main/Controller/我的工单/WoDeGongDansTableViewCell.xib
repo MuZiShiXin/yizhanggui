@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -123,12 +123,25 @@
                             <constraint firstAttribute="height" constant="10" id="grg-a3-Kot"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqh-gd-fq5">
+                        <rect key="frame" x="15" y="170" width="80" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="H91-Hk-GAd"/>
+                        </constraints>
+                        <state key="normal" title="再来一单">
+                            <color key="titleColor" red="0.15209141370000001" green="0.71627593040000004" blue="0.95240598919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="OnceAgainSender" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hew-0z-0zS"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Tb-ba-2pk" firstAttribute="leading" secondItem="cB4-Dx-M3B" secondAttribute="trailing" constant="11" id="1Fo-I5-FUO"/>
                     <constraint firstItem="Z9M-6K-UxY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="6ym-Oo-pHQ"/>
                     <constraint firstItem="Dpo-9H-6eY" firstAttribute="top" secondItem="Z9M-6K-UxY" secondAttribute="bottom" constant="11" id="74d-Ob-IbZ"/>
                     <constraint firstItem="Zp9-0V-3rK" firstAttribute="leading" secondItem="Dpo-9H-6eY" secondAttribute="trailing" constant="5" id="7co-eT-MvL"/>
+                    <constraint firstItem="Aqh-gd-fq5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="7iO-f4-xdx"/>
                     <constraint firstAttribute="trailing" secondItem="lK4-oA-Kid" secondAttribute="trailing" constant="15" id="D2f-75-Bro"/>
                     <constraint firstItem="cB4-Dx-M3B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="FhL-7l-WXx"/>
                     <constraint firstItem="8J5-iJ-TFb" firstAttribute="top" secondItem="IEy-MI-caq" secondAttribute="bottom" constant="10" id="Fmp-Kx-4oc"/>
@@ -144,6 +157,7 @@
                     <constraint firstItem="NJZ-S8-xfo" firstAttribute="top" secondItem="8J5-iJ-TFb" secondAttribute="bottom" constant="15" id="VsT-6W-rqk"/>
                     <constraint firstItem="wMU-mK-61I" firstAttribute="leading" secondItem="Zp9-0V-3rK" secondAttribute="trailing" constant="5" id="Vya-Ya-ZGg"/>
                     <constraint firstAttribute="bottom" secondItem="fx1-Cl-UGi" secondAttribute="bottom" id="XlJ-9b-QbE"/>
+                    <constraint firstItem="NJZ-S8-xfo" firstAttribute="centerY" secondItem="Aqh-gd-fq5" secondAttribute="centerY" id="Yzy-FK-E4p"/>
                     <constraint firstItem="Dpo-9H-6eY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="asD-XZ-Jjb"/>
                     <constraint firstAttribute="trailing" secondItem="NJZ-S8-xfo" secondAttribute="trailing" constant="15" id="bBQ-XD-ctM"/>
                     <constraint firstItem="cB4-Dx-M3B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cyE-Zq-pGV"/>
@@ -159,6 +173,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="9mg-gU-f7L"/>
             <connections>
+                <outlet property="OnceAgainBtn" destination="Aqh-gd-fq5" id="ToK-vg-e79"/>
                 <outlet property="anniusButton" destination="lK4-oA-Kid" id="ID5-TC-7fC"/>
                 <outlet property="biaotiLabel" destination="vQe-Ri-LeB" id="PI0-Li-AfZ"/>
                 <outlet property="fabushijianLabel" destination="Dpo-9H-6eY" id="H6x-AZ-YiF"/>

@@ -188,7 +188,12 @@
     UIButton *nanButton = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lineView.frame), kScreenWidth, 45)];
     [nanButton setTitle:@"男" forState:UIControlStateNormal];
     nanButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [nanButton setTitleColor:[UIColor hx_colorWithHexRGBAString:@"27b8f3"] forState:(UIControlStateNormal)];
+    if ([_xingbieLabel.text isEqualToString:@"男"]||[_xingbieLabel.text isEqualToString:@""]) {
+        [nanButton setTitleColor:[UIColor hx_colorWithHexRGBAString:@"27b8f3"] forState:(UIControlStateNormal)];
+    }else if ([_xingbieLabel.text isEqualToString:@"女"])
+    {
+        [nanButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    }
     nanButton.tag = 1200;
     [nanButton addTarget:self action:@selector(nanAndnv:) forControlEvents:UIControlEventTouchUpInside];
     [BJview addSubview:nanButton];
@@ -201,6 +206,12 @@
     [nvButton setTitle:@"女" forState:UIControlStateNormal];
     nvButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [nvButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    if ([_xingbieLabel.text isEqualToString:@"女"]) {
+        [nvButton setTitleColor:[UIColor hx_colorWithHexRGBAString:@"27b8f3"] forState:(UIControlStateNormal)];
+    }else if ([_xingbieLabel.text isEqualToString:@"男"]||[_xingbieLabel.text isEqualToString:@""])
+    {
+        [nvButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    }
     nvButton.tag = 1201;
     [nvButton addTarget:self action:@selector(nanAndnv:) forControlEvents:UIControlEventTouchUpInside];
     [BJview addSubview:nvButton];
@@ -230,8 +241,14 @@
     NSLog(@"确定");
     [toolbar removeFromSuperview];
     [BJview removeFromSuperview];
-    [self httpRequest:_xingbieLabel.text ChanShu:@"gender"];
-
+    
+    if ([_xingbieLabel.text isEqualToString:@""]) {
+        _xingbieLabel.text = @"男";
+        [self httpRequest:_xingbieLabel.text ChanShu:@"gender"];
+    }else
+    {
+        [self httpRequest:_xingbieLabel.text ChanShu:@"gender"];
+    }
 }
 
 
@@ -245,10 +262,14 @@
     if (btn.tag == 1200) {
         [button setTitleColor:[UIColor hx_colorWithHexRGBAString:@"27b8f3"] forState:UIControlStateNormal];
         [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_xingbieLabel setText:@"男"];
+
     }else
     {
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button1 setTitleColor:[UIColor hx_colorWithHexRGBAString:@"27b8f3"] forState:UIControlStateNormal];
+        [_xingbieLabel setText:@"女"];
+
     }
 
 }

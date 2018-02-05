@@ -21,6 +21,7 @@ typedef void (^BasicDisplayTCBlock)(NSIndexPath *);
 
 @property (nonatomic ,strong) HomeModel *Homemodel;
 @property (nonatomic ,strong) NSIndexPath *HomeIndexPahh;
+@property (nonatomic ,assign) NSInteger resultNmb;
 
 // 头像
 @property (nonatomic, strong) UIImageView *headImageView;

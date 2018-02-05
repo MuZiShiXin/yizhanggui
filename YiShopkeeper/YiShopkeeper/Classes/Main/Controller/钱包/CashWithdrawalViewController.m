@@ -129,13 +129,13 @@
 {
     NSString *urlStr = [NSString stringWithFormat:@"%@/user/ExtractingAmount/AlipayAccount",kPRTURL];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(Global.userInfoId),@"userInfoId", amountTextField.text,@"ExtractingAmount",payTextField.text,@"AlipayAccount", nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(Global.userInfoId),@"userInfoId", amountTextField.text,@"ExtractingAmount",payTextField.text,@"AlipayAccount",[NSString stringWithFormat:@"%.2f",self.resultDic],@"ExtraAccountBalance", nil];
     
     [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];
         if (result == 1) {
             [self showRightWithTitle:@"提交成功余额将在24小时内到账" autoCloseTime:2];
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }else
         {
             [self showErrorWithTitle:@"提现失败" autoCloseTime:2];

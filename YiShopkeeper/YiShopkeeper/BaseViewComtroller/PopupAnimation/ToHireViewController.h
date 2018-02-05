@@ -16,6 +16,8 @@
 #import<BaiduMapAPI_Map/BMKMapComponent.h>
 
 #import<BaiduMapAPI_Search/BMKPoiSearchType.h>
+#import "gongdansModel.h"
+
 @interface ToHireViewController : BaseViewController <BMKMapViewDelegate , BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     BMKLocationService * _locService;
@@ -31,6 +33,6 @@
 @property (strong, nonatomic) BMKMapView *mapView;
 @property (nonatomic, strong)BMKGeoCodeSearch* searchAddress;
 @property (nonatomic,strong)BMKUserLocation *userLocation; //定位功能
-
+@property (nonatomic,strong) gongdansModel *Model;
 
 @end

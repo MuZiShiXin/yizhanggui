@@ -410,7 +410,7 @@
     
     NSLog(@"onClickedMapBlank-latitude==%f,longitude==%f",coordinate.latitude,coordinate.longitude);
     self.latitudeY = coordinate.latitude;
-    self.longitudeX = coordinate.latitude;
+    self.longitudeX = coordinate.longitude;
 }
 
 //点击地图中的背景有标记的区域

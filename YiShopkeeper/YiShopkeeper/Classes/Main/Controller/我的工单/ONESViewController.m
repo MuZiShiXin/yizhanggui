@@ -127,7 +127,11 @@
         //没有现成的cell的时候：
         cell = [[[NSBundle mainBundle]loadNibNamed:@"WoDeGongDansTableViewCell" owner:nil options:nil] firstObject];
     }
-    [cell initSubViewsWithIndexPath:indexPath dataModel:self.ModelDic[indexPath.row]];
+    if (self.ModelDic.count != 0) {
+        [cell initSubViewsWithIndexPath:indexPath dataModel:self.ModelDic[indexPath.row]];
+        cell.Model = self.ModelDic[indexPath.row];
+    }
+    cell.Navi = self.Navi;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //给cell设置内容 从之前设置的数据数组中拿数据
     return cell;

@@ -20,12 +20,13 @@
 #import "ChatListViewController.h"
 #import <RongIMKit/RCConversationViewController.h>
 #import <UShareUI/UShareUI.h>
-
+#import "WXApi.h"
 @interface MainViewController ()
 {
     UIButton *headImageButton;
 }
 @property (nonatomic , strong) UserInfoQueryModel *UserInfoModel;
+@property (nonatomic , strong) NSString *token;
 @end
 
 @implementation MainViewController
@@ -41,7 +42,18 @@
 {
     [super viewWillAppear:animated];
     [self httpRequest];
+    [self HttpRequestRongYun];
 }
+
+- (void)HttpRequestRongYun{
+    NSString *url = [NSString stringWithFormat:@"%@/Expert/MySelfInfo/queryRongYun",kPRTURL];
+    [BaseHttpTool GET:url params:nil success:^(id  _Nullable responseObj) {
+        self.token = [responseObj objectForKey:@"data"];
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
 
 - (void)httpRequest
 {
@@ -274,36 +286,24 @@
 {
     if (btn.tag == 500) {
         NSLog(@"分享");
-        [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone),@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_Sms),@(UMSocialPlatformType_Email)]];
-        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-            // 根据获取的platformType确定所选平台进行下一步操作
-            if (platformType == UMSocialPlatformType_WechatSession ||platformType == UMSocialPlatformType_WechatTimeLine) {
-                [self shareToWeiXin:platformType];
-            }else if (platformType == UMSocialPlatformType_Sina)
-            {
-                
-            }else if (platformType == UMSocialPlatformType_Sms)
-            {
-                
-            }else if (platformType == UMSocialPlatformType_Email)
-            {
-                
-            }else if (platformType == UMSocialPlatformType_Qzone)
-            {
-                
-            }else if (platformType == UMSocialPlatformType_QQ)
-            {
-                
-            }else
-            {
-                
-            }
-            
-        }];
+        WXMediaMessage *message = [WXMediaMessage message];
+        message.title = @"98易工是劳务供需综合平台，这里有您想要的工作，这里有您满意的工人";
+        message.description = @"分享描述";
+        [message setThumbImage:[UIImage imageNamed:@"yg_wd_szgy_nr_tb1"]];
         
+        WXWebpageObject *webpageObject = [WXWebpageObject object];
+        webpageObject.webpageUrl = @"https://open.weixin.qq.com";
+        message.mediaObject = webpageObject;
         
-        
-        
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        // 微信好友
+//        req.scene = WXSceneSession;
+        // 微信朋友圈
+        req.scene = WXSceneTimeline;
+        [WXApi sendReq:req];
+
     }else if (btn.tag == 501)
     {
         NSLog(@"意见反馈");
@@ -311,8 +311,7 @@
         [self.navigationController pushViewController:FeedbackVC animated:YES];
     }else{
         NSLog(@"联系客服");
-        NSString*token=@"Cy0jErlwtmgJ8rB3ZO1g7QQo6oi3mCmwtYGl2yIkpUNxCwMQPb8N4ZD36D0QEI0BE4offeXIacurRyug31N0OQ==";
-        [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
+        [[RCIM sharedRCIM] connectWithToken:self.token success:^(NSString *userId) {
             //设置用户信息提供者,页面展现的用户头像及昵称都会从此代理取
             [[RCIM sharedRCIM] setUserInfoDataSource:self];
             NSLog(@"Login successfully with userId: %@.", userId);
@@ -352,42 +351,42 @@
 }
 
 
-- (void)shareToWeiXin:(UMSocialPlatformType) platformType
-{
+//- (void)shareToWeiXin:(UMSocialPlatformType) platformType
+//{
     //网页分享
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //创建网页内容对象(带了图片)
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"的分享" descr:@"关于明天shang班的通知" thumImage:[UIImage imageNamed:@"WebOfBanner_InvitationCode"]];
-    //设置你要分享出去的网页地址
-    shareObject.webpageUrl = @"http://www.baidu.com";
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error)
-     {
-         if (error)
-         {
-             UMSocialLogInfo(@"************Share fail with error %@*********",error);
-         }
-         else
-         {
-             if ([data isKindOfClass:[UMSocialShareResponse class]])
-             {
-                 UMSocialShareResponse *resp = data;
-                 //分享结果消息
-                 UMSocialLogInfo(@"response message is %@",resp.message);
-                 //第三方原始返回的数据
-                 UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                 
-             }
-             else
-             {
-                 UMSocialLogInfo(@"response data is %@",data);
-             }
-         }
-     }];
-}
+//    //创建分享消息对象
+//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+//    //创建网页内容对象(带了图片)
+//    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"的分享" descr:@"关于明天shang班的通知" thumImage:[UIImage imageNamed:@"WebOfBanner_InvitationCode"]];
+//    //设置你要分享出去的网页地址
+//    shareObject.webpageUrl = @"http://www.baidu.com";
+//    //分享消息对象设置分享内容对象
+//    messageObject.shareObject = shareObject;
+//    //调用分享接口
+//    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error)
+//     {
+//         if (error)
+//         {
+//             UMSocialLogInfo(@"************Share fail with error %@*********",error);
+//         }
+//         else
+//         {
+//             if ([data isKindOfClass:[UMSocialShareResponse class]])
+//             {
+//                 UMSocialShareResponse *resp = data;
+//                 //分享结果消息
+//                 UMSocialLogInfo(@"response message is %@",resp.message);
+//                 //第三方原始返回的数据
+//                 UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+//
+//             }
+//             else
+//             {
+//                 UMSocialLogInfo(@"response data is %@",data);
+//             }
+//         }
+//     }];
+//}
 
 
 - (void)didReceiveMemoryWarning {

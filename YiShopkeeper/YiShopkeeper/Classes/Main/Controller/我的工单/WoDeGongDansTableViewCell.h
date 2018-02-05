@@ -13,4 +13,7 @@
 @interface WoDeGongDansTableViewCell : UITableViewCell
 @property (strong ,nonatomic)NSString *jinduStr;
 - (void)initSubViewsWithIndexPath:(NSIndexPath *)indexPath dataModel:(gongdansModel *)Model;
+@property (strong ,nonatomic)gongdansModel *Model;
+@property (strong ,nonatomic) UINavigationController *Navi;
+
 @end

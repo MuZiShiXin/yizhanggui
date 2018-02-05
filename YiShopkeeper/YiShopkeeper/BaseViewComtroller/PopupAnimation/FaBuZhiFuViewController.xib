@@ -155,7 +155,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDD-l9-yor">
-                    <rect key="frame" x="0.0" y="285" width="375" height="68.5"/>
+                    <rect key="frame" x="0.0" y="285" width="375" height="88.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共计花费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bC-dW-Qlq">
                             <rect key="frame" x="15" y="15" width="61.5" height="15"/>
@@ -175,19 +175,28 @@
                             <color key="textColor" red="1" green="0.082991722109999999" blue="0.05357956446" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注：当工单没有达成，到达截至时间自动退还到钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAx-dW-0i7">
+                            <rect key="frame" x="15" y="69" width="345" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="0.082174547016620636" blue="0.055244222283363342" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="3bC-dW-Qlq" firstAttribute="leading" secondItem="NDD-l9-yor" secondAttribute="leading" constant="15" id="2Se-ca-AV4"/>
                         <constraint firstItem="Zxx-hB-art" firstAttribute="leading" secondItem="NDD-l9-yor" secondAttribute="leading" constant="15" id="6HR-uP-bfh"/>
-                        <constraint firstAttribute="height" constant="68.5" id="QY7-cg-izt"/>
+                        <constraint firstAttribute="height" constant="88.5" id="QY7-cg-izt"/>
                         <constraint firstAttribute="trailing" secondItem="Zxx-hB-art" secondAttribute="trailing" constant="15" id="gu6-B4-bT9"/>
+                        <constraint firstItem="lAx-dW-0i7" firstAttribute="leading" secondItem="NDD-l9-yor" secondAttribute="leading" constant="15" id="gum-TN-9dh"/>
                         <constraint firstItem="Zxx-hB-art" firstAttribute="top" secondItem="3bC-dW-Qlq" secondAttribute="bottom" constant="15" id="iWu-Ih-Hza"/>
                         <constraint firstItem="3bC-dW-Qlq" firstAttribute="top" secondItem="NDD-l9-yor" secondAttribute="top" constant="15" id="kyq-UN-a9a"/>
+                        <constraint firstAttribute="bottom" secondItem="lAx-dW-0i7" secondAttribute="bottom" constant="5" id="mkJ-in-R8s"/>
+                        <constraint firstAttribute="trailing" secondItem="lAx-dW-0i7" secondAttribute="trailing" constant="15" id="yiR-E8-gT8"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylC-bd-Cwp">
-                    <rect key="frame" x="0.0" y="358.5" width="375" height="130"/>
+                    <rect key="frame" x="0.0" y="378.5" width="375" height="130"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkk-gd-XvL">
                             <rect key="frame" x="15" y="65" width="345" height="1"/>

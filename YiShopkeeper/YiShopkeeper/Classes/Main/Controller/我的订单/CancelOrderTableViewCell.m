@@ -72,14 +72,14 @@
         [_yiquxiaoButton setTitle:@"结算中" forState:UIControlStateNormal];
         _yiquxiaoButton.userInteractionEnabled = NO;
 
-    }else if (dic.dingDanZhuangTai == 6)
+    }else if (dic.dingDanZhuangTai == 6 ||dic.dingDanZhuangTai == 15)
     {
         [_yiquxiaoButton setTitle:@"待评价" forState:UIControlStateNormal];
         _yiquxiaoButton.layer.borderColor = [[UIColor hx_colorWithHexRGBAString:kBlueColor] CGColor];
         [_yiquxiaoButton setTitleColor:[UIColor hx_colorWithHexRGBAString:kBlueColor] forState:UIControlStateNormal];
     }else if (dic.dingDanZhuangTai == 8)
     {
-        [_yiquxiaoButton setTitle:@"工单结束" forState:UIControlStateNormal];
+        [_yiquxiaoButton setTitle:@"订单结束" forState:UIControlStateNormal];
         _yiquxiaoButton.userInteractionEnabled = NO;
 
     }else if (dic.dingDanZhuangTai == 10)
@@ -90,6 +90,10 @@
     }else if (dic.dingDanZhuangTai == 11)
     {
         [_yiquxiaoButton setTitle:@"已取消" forState:UIControlStateNormal];
+        _yiquxiaoButton.userInteractionEnabled = NO;
+    }else if (dic.dingDanZhuangTai == 14)
+    {
+        [_yiquxiaoButton setTitle:@"已评价" forState:UIControlStateNormal];
         _yiquxiaoButton.userInteractionEnabled = NO;
     }
     
@@ -103,8 +107,9 @@
         PingjiaSViewController *PingjiaSVC = [[PingjiaSViewController alloc]init];
         PingjiaSVC.dingDanId = self.models.dingDanId;
         PingjiaSVC.gongDanId = self.models.gongDanId;
+        PingjiaSVC.daRenID   = self.models.daRenId;
         [self.Navi pushViewController:PingjiaSVC animated:YES];
-    }else if ([btn.titleLabel.text isEqualToString:@"已取消"] || [btn.titleLabel.text isEqualToString:@"工单结束"] || [btn.titleLabel.text isEqualToString:@"工单异常"])
+    }else if ([btn.titleLabel.text isEqualToString:@"已取消"] || [btn.titleLabel.text isEqualToString:@"订单结束"] || [btn.titleLabel.text isEqualToString:@"工单异常"])
     {
         return;
     }else

@@ -20,7 +20,7 @@
 #endif
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
-#define RONGCLOUD_IM_APPKEY @"pkfcgjstpkh88" //请换成您的appkey
+#define RONGCLOUD_IM_APPKEY @"pwe86ga5piop6" //请换成您的appkey
 @interface AppDelegate ()<BMKGeneralDelegate,WXApiDelegate,JPUSHRegisterDelegate>
 
 @end

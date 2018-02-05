@@ -131,7 +131,7 @@
         [self.dingdanzhuangtaiImage6 setImage:[UIImage imageNamed:@"yg_dd_qxxq_nr_tb2"]];
         self.jinduProgressView.progress = 0.7142;
         
-    }else if ([str isEqualToString:@"6"])
+    }else if ([str isEqualToString:@"6"]||[str isEqualToString:@"15"]||[str isEqualToString:@"14"])
     {
         
         [self.liuchengImageView1 setImage:[UIImage imageNamed:@"yg_dd_qxxq_nr_tb1"]];

@@ -30,5 +30,12 @@
 @property (assign ,nonatomic) CGFloat zhiLiang;
 @property (assign ,nonatomic) CGFloat xiaoLv;
 @property (assign ,nonatomic) CGFloat jiNeng;
+@property (assign ,nonatomic) NSInteger useramt;//总开工达人
+@property (assign ,nonatomic) NSInteger gdamt;//总发布次数
+@property (assign ,nonatomic) NSInteger orderamt;//已接活人数
+
+
+
+
 + (instancetype)creatRankingTotalModelWith:(NSDictionary *)dict;
 @end

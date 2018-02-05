@@ -435,6 +435,7 @@
 		18256B8D1FF0F76900B7E312 /* BTPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTPView.m; sourceTree = "<group>"; };
 		18256B8F1FF0F76900B7E312 /* NSArray+ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ToString.h"; sourceTree = "<group>"; };
 		18256B901FF0F76900B7E312 /* NSArray+ToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ToString.m"; sourceTree = "<group>"; };
+		182608EA202728EF00F234D9 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
 		182FECD92003F9F8001AF72A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		183422101FC3C5520050AD6A /* RegistrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
 		183422111FC3C5520050AD6A /* RegistrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
@@ -2148,6 +2149,7 @@
 		18CF64441FC269F90077889E = {
 			isa = PBXGroup;
 			children = (
+				182608EA202728EF00F234D9 /* BMKLocationKit.framework */,
 				188CEC1D1FF48A580007962B /* AlipaySDK.bundle */,
 				189552581FD4DB63001326D7 /* YMCitySelect.bundle */,
 				184F00251FEFEC1E003152CD /* mapapi.bundle */,
@@ -2834,7 +2836,7 @@
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/apple/Desktop/千石科技/YiShopkeeper/YiShopkeeper/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YiShopkeeper/PrefixHeader.pch";
 				INFOPLIST_FILE = YiShopkeeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2880,7 +2882,7 @@
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/apple/Desktop/千石科技/YiShopkeeper/YiShopkeeper/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YiShopkeeper/PrefixHeader.pch";
 				INFOPLIST_FILE = YiShopkeeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

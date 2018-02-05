@@ -5,11 +5,11 @@
 //  Created by  apple on 2017/12/8.
 //  Copyright © 2017年 程序员. All rights reserved.
 //
-
 #import "FaBuZhiFuViewController.h"
 #import "APOrderInfo.h"
 #import "WXApi.h"
 #import "HomeViewController.h"
+#import "WoDeGongDanViewController.h"
 @interface FaBuZhiFuViewController ()
 @property (nonatomic ,strong) NSString *zhifuTy;
 @end
@@ -83,12 +83,14 @@
             [SVProgressHUD showInfoWithStatus:strMsg];
             NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
             [self httpRequest];
+            [self HttpSaveDealRecord:@"1" dealType:@"微信支付" dealAmount:[[self.parameters objectForKey:@"zongJi"] doubleValue]];
             break;
             
         default:
             strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
             [SVProgressHUD showInfoWithStatus:strMsg];
             NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+            [self HttpSaveDealRecord:@"2" dealType:@"微信支付" dealAmount:[[self.parameters objectForKey:@"zongJi"] doubleValue]];
             break;
     }
     
@@ -133,23 +135,48 @@
     
 }
 
-#pragma mark 发布接口请求
+//#pragma mark 发布接口请求
+//- (void)httpRequest
+//{
+//    NSString *urlStr = [NSString stringWithFormat:@"%@/gongdan/fabu",kPRTURL];
+//    [BaseHttpTool POST:urlStr params:self.parameters success:^(id  _Nullable responseObj) {
+//        NSInteger result = [[responseObj valueForKey:@"result"] intValue];
+//
+//        if (result == 1) {
+//            [self.view showRightWithTitle:@"发布成功" autoCloseTime:2];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }else
+//        {
+//
+//        }
+//    } failure:^(NSError * _Nullable error) {
+//        NSLog(@"loginError:%@",error);
+//
+//    }];
+//}
+
+#pragma mark 修改发过的工单状态请求
 - (void)httpRequest
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@/gongdan/fabu",kPRTURL];
-    [BaseHttpTool POST:urlStr params:self.parameters success:^(id  _Nullable responseObj) {
+    NSString *urlStr = [NSString stringWithFormat:@"%@/repairordertomodify/ChangePayStateGongDan",kPRTURL];
+    NSDictionary *parameters =
+    [[NSDictionary alloc]initWithObjectsAndKeys:@(Global.userInfoId),@"userInfoId",@(self.recruitInfoId),@"recruitInfoId",@(1),@"recruitPayState",nil];
+    [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];
-        
+
         if (result == 1) {
             [self.view showRightWithTitle:@"发布成功" autoCloseTime:2];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            WoDeGongDanViewController *WoDeGongDanVC = [[WoDeGongDanViewController alloc]init];
+            [self.navigationController pushViewController:WoDeGongDanVC animated:YES];
+            
+//            [self.navigationController popToRootViewControllerAnimated:YES];
         }else
         {
-            
+
         }
     } failure:^(NSError * _Nullable error) {
         NSLog(@"loginError:%@",error);
-        
+
     }];
 }
 
@@ -158,7 +185,8 @@
 - (void)httpAliAppPayRequest
 {
     NSString *urlStr = [NSString stringWithFormat:@"%@/AliPay/AliAppPay",kPRTURL];
-    NSString *zongJiStr = [NSString stringWithFormat:@"%@",[self.parameters objectForKey:@"zongJi"]];
+//    NSString *zongJiStr = [NSString stringWithFormat:@"%@",[self.parameters objectForKey:@"zongJi"]];
+    NSString *zongJiStr = @"0.01";
     NSDictionary *parame = [NSDictionary dictionaryWithObjectsAndKeys:@"信息描述",@"body",@"98易工",@"subject",zongJiStr,@"totalAmount", nil];
     
     
@@ -218,7 +246,8 @@
     self.querenzhifuButton.userInteractionEnabled = NO;
     NSString *urlStr = [NSString stringWithFormat:@"%@/wxPay",kPRTURL];
     double aNumber = [[self.parameters objectForKey:@"zongJi"] doubleValue];
-    NSString *zongJiStr = [NSString stringWithFormat:@"%.0f",aNumber * 100];
+//    NSString *zongJiStr = [NSString stringWithFormat:@"%.0f",aNumber * 100];
+    NSString *zongJiStr = @"1";
     NSDictionary *parame = [NSDictionary dictionaryWithObjectsAndKeys:zongJiStr,@"totalFee", nil];
     
     [BaseHttpTool GET:urlStr params:parame success:^(id  _Nullable responseObj) {
@@ -246,16 +275,22 @@
                     if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
                         NSLog(@"支付成功");
                         [self httpRequest];
+                        
+                        [self HttpSaveDealRecord:@"1" dealType:@"支付宝支付" dealAmount:[[self.parameters objectForKey:@"zongJi"] doubleValue]];
+                        
                     }else if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"8000"])
                     {
+                        
+                        
                     }else if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"4000"])
                     {
                         NSLog(@"订单支付失败,请稍后再试");
+                        [self HttpSaveDealRecord:@"2" dealType:@"支付宝支付" dealAmount:[[self.parameters objectForKey:@"zongJi"] doubleValue]];
         
                     }else if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"6001"])
                     {
                         NSLog(@"支付被取消");
-        
+                        [self HttpSaveDealRecord:@"2" dealType:@"支付宝支付" dealAmount:[[self.parameters objectForKey:@"zongJi"] doubleValue]];
                     }else if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"6002"])
                     {
                         NSLog(@"网络连接出错,请稍后再试");
@@ -402,6 +437,35 @@
     }
     return resultStr;
 }
+
+
+
+
+#pragma mark 交易明细
+- (void)HttpSaveDealRecord:(NSString *)dealState dealType:(NSString *)Type dealAmount:(double)Amount
+{
+    NSString *urlStr = [NSString stringWithFormat:@"%@/DealRecord/saveDealRecord",kPRTURL];
+    NSDictionary *parame = [NSDictionary dictionaryWithObjectsAndKeys:dealState,@"dealState",@(self.recruitInfoId),@"serialNum",Type,@"dealType",@(Amount),@"dealAmount", nil];
+    
+    [BaseHttpTool POSTS:urlStr params:parame success:^(id  _Nullable responseObj) {
+        NSLog(@"%@",responseObj);
+    } failure:^(NSError * _Nullable error) {
+        NSLog(@"loginError:%@",error);
+    }];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

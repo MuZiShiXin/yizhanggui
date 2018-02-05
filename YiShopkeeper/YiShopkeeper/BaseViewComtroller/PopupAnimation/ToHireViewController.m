@@ -191,10 +191,7 @@
     return _SkillsPicturesImageView3;
 }
 
-
-
-
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear: animated];
     
@@ -203,12 +200,11 @@
     _locService.delegate = self;
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
 }
-
 
 - (void)httpRequest
 {
@@ -220,13 +216,6 @@
 
     }];
 }
-
-
-
-
-
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -262,6 +251,9 @@
     //标题
     headingsTextField = [[UITextField alloc]initWithFrame:CGRectMake(kScreenWidth - 185, 5, kScreenWidth-(kScreenWidth-170), 35)];
     headingsTextField.placeholder = @"请输入14字以内标题";
+    if (self.Model != nil) {
+        [headingsTextField setText:self.Model.biaoTi];
+    }
     headingsTextField.font = [UIFont systemFontOfSize:15];
     headingsTextField.textAlignment = NSTextAlignmentRight;
     headingsTextField.textColor = [UIColor hx_colorWithHexRGBAString:@"c7c7cd"];
@@ -276,6 +268,9 @@
     occupationLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (44-22)/2, occupationButton.mj_w-22, 22)];
     occupationLabel.textAlignment = NSTextAlignmentRight;
     occupationLabel.text = @"选择工种";
+    if (self.Model != nil) {
+        [occupationLabel setText: self.Model.jiNeng];
+    }
     occupationLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"c7c7cd"];
     occupationLabel.font = [UIFont systemFontOfSize:14];
     [occupationButton addTarget:self action:@selector(occupation) forControlEvents:UIControlEventTouchUpInside];
@@ -354,11 +349,11 @@
     [secondView addSubview:endTimeButton];
     
     //第三块
-    UIView *thirdView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(secondView.frame)+10, kScreenWidth, 132)];
+    UIView *thirdView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(secondView.frame)+10, kScreenWidth, 176)];
     thirdView.backgroundColor = [UIColor whiteColor];
     [bjScrollView addSubview:thirdView];
     
-    NSArray *thirdArray = @[@"用工薪酬",@"手续费",@"总计花费"];
+    NSArray *thirdArray = @[@"用工薪酬",@"保险费",@"手续费",@"总计花费"];
     for (int i = 0; i < thirdArray.count; i++) {
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(15, i*(15 + 30)+ 15, 100, 15)];
         label.font = [UIFont systemFontOfSize:14];
@@ -374,7 +369,7 @@
     //用工薪酬
     payTextField = [[UITextField alloc]initWithFrame:CGRectMake(kScreenWidth - 165, 5, kScreenWidth-(kScreenWidth-150), 35)];
     payTextField.placeholder = @"输入金额 0.00";
-    payTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    payTextField.keyboardType = UIKeyboardTypeNumberPad;
     payTextField.font = [UIFont systemFontOfSize:15];
     payTextField.textAlignment = NSTextAlignmentRight;
     payTextField.textColor = [UIColor hx_colorWithHexRGBAString:@"c7c7cd"];
@@ -382,22 +377,37 @@
     [payTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [thirdView addSubview:payTextField];
     
+    //保险费
+    UIButton *insurancePremiumBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth-(kScreenWidth - 115), CGRectGetMaxY(payTextField.frame)+5, kScreenWidth-100-25, 44)];
+    UIImageView *insurancePremiumImage = [[UIImageView alloc]initWithFrame:CGRectMake(insurancePremiumBtn.mj_w-22, (44-22)/2, 22, 22)];
+    insurancePremiumImage.image = [UIImage imageNamed:@"yg_syfb_nr_tb1"];
+    UILabel *insurancePremiumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (44-22)/2, insurancePremiumBtn.mj_w-22, 22)];
+    insurancePremiumLabel.textAlignment = NSTextAlignmentRight;
+    insurancePremiumLabel.text = @"该功能尚未开完全敬请期待";
+    insurancePremiumLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"282828"];
+    insurancePremiumLabel.font = [UIFont systemFontOfSize:14];
+    [insurancePremiumBtn addTarget:self action:@selector(insurancePremium) forControlEvents:UIControlEventTouchUpInside];
+    [insurancePremiumBtn addSubview:insurancePremiumImage];
+    [insurancePremiumBtn addSubview:insurancePremiumLabel];
+    [thirdView addSubview:insurancePremiumBtn];
+    
+
     //手续费
-    UIButton *handlingChargeButton = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth-(kScreenWidth - 115), CGRectGetMaxY(payTextField.frame)+5, kScreenWidth-100-25, 44)];
-    UIImageView *handlingChargeImage = [[UIImageView alloc]initWithFrame:CGRectMake(handlingChargeButton.mj_w-22, (44-22)/2, 22, 22)];
-    handlingChargeImage.image = [UIImage imageNamed:@"yg_syfb_nr_tb1"];
-    handlingChargeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (44-22)/2, handlingChargeButton.mj_w-22, 22)];
+    UIButton *handlingChargeButton = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth-(kScreenWidth - 115), CGRectGetMaxY(insurancePremiumBtn.frame)+5, kScreenWidth-100-30, 44)];
+//    UIImageView *handlingChargeImage = [[UIImageView alloc]initWithFrame:CGRectMake(handlingChargeButton.mj_w-22, (44-22)/2, 22, 22)];
+//    handlingChargeImage.image = [UIImage imageNamed:@"yg_syfb_nr_tb1"];
+    handlingChargeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (44-22)/2, handlingChargeButton.mj_w, 22)];
     handlingChargeLabel.textAlignment = NSTextAlignmentRight;
     handlingChargeLabel.text = @"0.00";
     handlingChargeLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"282828"];
     handlingChargeLabel.font = [UIFont systemFontOfSize:14];
-    [handlingChargeButton addTarget:self action:@selector(handlingCharge) forControlEvents:UIControlEventTouchUpInside];
-    [handlingChargeButton addSubview:handlingChargeImage];
+//    [handlingChargeButton addTarget:self action:@selector(handlingCharge) forControlEvents:UIControlEventTouchUpInside];
+//    [handlingChargeButton addSubview:handlingChargeImage];
     [handlingChargeButton addSubview:handlingChargeLabel];
     [thirdView addSubview:handlingChargeButton];
 
     //总花费
-    AlwaysRememberToSpendLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth - 165, CGRectGetMaxY(handlingChargeButton.frame)+5, kScreenWidth-(kScreenWidth-150), 35)];
+    AlwaysRememberToSpendLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth - 165, CGRectGetMaxY(handlingChargeButton.frame), kScreenWidth-(kScreenWidth-150), 35)];
     AlwaysRememberToSpendLabel.text = @"0.00";
     AlwaysRememberToSpendLabel.font = [UIFont systemFontOfSize:15];
     AlwaysRememberToSpendLabel.textAlignment = NSTextAlignmentRight;
@@ -496,7 +506,7 @@
     bjScrollView.bounces = NO;
     [self.view addSubview:bjScrollView];
 }
-#pragma mark 提示
+#pragma mark 平台收费提示
 - (void)instructionsUpInside
 {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"平台收费标准" message:@"按照成交订单每人次一元计算收取，不成交订单平台不扣除手续费" preferredStyle:UIAlertControllerStyleAlert];
@@ -885,18 +895,7 @@
         [self showInfoWithTitle:@"工种不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
         return;
-    }else if (peopleNumberTextField.text.length == 0 || peopleNumberTextField.text == nil)
-    {
-        [self showInfoWithTitle:@"用工人数不能为空" autoCloseTime:2];
-        btn.userInteractionEnabled = YES;
-        return;
-    }else if (![self inputShouldNumber:peopleNumberTextField.text]){
-        [self showInfoWithTitle:@"用工人数为数字" autoCloseTime:2];
-        btn.userInteractionEnabled = YES;
-        return;
-    }else if ([[NSString stringWithFormat:@"%@",peopleNumberTextField.text] integerValue] <= 0)
-    {
-        [self showInfoWithTitle:@"人数不为0" autoCloseTime:2];
+    }else if ([self inputShouldNumber:peopleNumberTextField.text]== NO){
         btn.userInteractionEnabled = YES;
         return;
     }else if (startTimeLabel.text.length == 0 || startTimeLabel.text == nil)
@@ -909,19 +908,6 @@
         [self showInfoWithTitle:@"结束时间不能为空" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
         return;
-    }else if (payTextField.text.length == 0 || payTextField.text == nil)
-    {
-        [self showInfoWithTitle:@"薪酬不能为空" autoCloseTime:2];
-        btn.userInteractionEnabled = YES;
-        return;
-    }else if (payTextField.text.length == 1)
-    {
-        NSInteger num = [payTextField.text integerValue];
-        if (num <= 0) {
-           [self showInfoWithTitle:@"薪酬不能小于0" autoCloseTime:2];
-            btn.userInteractionEnabled = YES;
-            return;
-        }
     }else if (addressLabel.text.length == 0 || addressLabel.text == nil)
     {
         [self showInfoWithTitle:@"用工地址不能为空" autoCloseTime:2];
@@ -937,7 +923,12 @@
         [self showInfoWithTitle:@"工作图片不得少于2张" autoCloseTime:2];
         btn.userInteractionEnabled = YES;
         return;
+    }else if([self inputNumber:payTextField.text] == NO)
+    {
+        btn.userInteractionEnabled = YES;
+        return;
     }
+    
     NSInteger yonggongrenshuNumber = [peopleNumberTextField.text integerValue];
     CGFloat xinchou = [payTextField.text floatValue];
     NSArray *myArray = [self.dicAry copy];
@@ -958,18 +949,22 @@
      phone,@"gongZuoNeiRong",
      text,@"tuPians",
      @(self.latitudeY),@"Y",
-     @(self.longitudeX),@"X"
-     ,nil];
-    
-    
-    
-    
+     @(self.longitudeX),@"X",
+     nil];
+
     NSString *urlStr = [NSString stringWithFormat:@"%@/gongdan/fabu",kPRTURL];
     [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];
 
         if (result == 1) {
-            [self.view showRightWithTitle:@"发布成功" autoCloseTime:2];
+            NSInteger recruitInfoId = [[responseObj valueForKeyWithNullDetection:@"data"] integerValue];
+            [self.view showRightWithTitle:@"资料上传成功" autoCloseTime:2];
+            if (recruitInfoId != 0) {
+                FaBuZhiFuViewController *FaBuZhiFuVC = [[FaBuZhiFuViewController alloc] init];
+                FaBuZhiFuVC.parameters = parameters;
+                FaBuZhiFuVC.recruitInfoId = [[responseObj objectForKey:@"data"] integerValue];
+                [self.navigationController pushViewController:FaBuZhiFuVC animated:YES];
+            }
         }else
         {
 
@@ -978,50 +973,24 @@
         NSLog(@"loginError:%@",error);
 
     }];
-    
-//    NSDictionary *parameters =
-//        [NSDictionary dictionaryWithObjectsAndKeys:
-//         headingsTextField.text,@"biaoTi",nil];
-
-//    FaBuZhiFuViewController *FaBuZhiFuVC = [FaBuZhiFuViewController alloc];
-//    FaBuZhiFuVC.parameters = parameters;
-//    [self.navigationController pushViewController:FaBuZhiFuVC animated:YES];
 }
 
 
 + (NSString *)typeForImageData:(NSData *)data {
-    
-    
-    
     uint8_t c;
-    
     [data getBytes:&c length:1];
-    
-    
-    
     switch (c) {
-            
         case 0xFF:
-            
             return @".jpg";
-            
         case 0x89:
-            
             return @".png";
-            
         case 0x47:
-            
             return @".gif";
-            
         case 0x49:
-            
         case 0x4D:
-            
             return @".tiff";
-            
     }
     return nil;
-    
 }
 
 
@@ -1030,7 +999,6 @@
 {
     __weak typeof(self) weakSelf = self;
     WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDayHourMinute CompleteBlock:^(NSDate *selectDate) {
-        
         if ([str isEqualToString:@"startTime"]) {
             NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
             NSLog(@"选择的日期：%@",date);
@@ -1041,7 +1009,6 @@
             NSLog(@"选择的日期：%@",date);
             endTimeLabel.text = date;
             [weakSelf handlingCharge];
-
         }
     }];
     NSDate *nowDate = [NSDate date];
@@ -1053,8 +1020,23 @@
     datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
     datepicker.doneButtonColor = [UIColor hx_colorWith8BitRed:65 green:188 blue:241];//确定按钮的颜色
     [datepicker show];
-    
 }
+
+
+#pragma mark 保险费
+-(void)insurancePremium
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"系统提示" message:@"该功能尚未开完全敬请期待" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        NSLog(@"action = %@", action);
+    }];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+
 #pragma mark - 收起键盘
 - (void)shouqijianpan
 {
@@ -1237,40 +1219,40 @@
 
 
 //确定按钮的点击
+//
+//- (void)sureButtonClick:(UIButton *)button{
+//
+//    //    if([self.chosseAddressDelegate respondsToSelector:@selector(chosseAddressBack:name:point:)]){
+//    //        [self.chosseAddressDelegate chosseAddressBack:self.addressLabel.text name:self.name point:self.location2D];
+//    //    }
+//    //    [self.navigationController popViewControllerAnimated:YES];
+//    [addressLabel setText:self.addressLabels.text];
+//}
 
-- (void)sureButtonClick:(UIButton *)button{
-    
-    //    if([self.chosseAddressDelegate respondsToSelector:@selector(chosseAddressBack:name:point:)]){
-    //        [self.chosseAddressDelegate chosseAddressBack:self.addressLabel.text name:self.name point:self.location2D];
-    //    }
-    //    [self.navigationController popViewControllerAnimated:YES];
-    [addressLabel setText:self.addressLabels.text];
-}
-
-- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view{
-    NSLog(@"点击了");
-    CLLocationCoordinate2D pt=(CLLocationCoordinate2D){0,0};
-    pt=(CLLocationCoordinate2D){mapView.region.center.latitude,mapView.region.center.longitude};
-    BMKReverseGeoCodeOption * option = [[BMKReverseGeoCodeOption alloc]init];
-    option.reverseGeoPoint = pt;
-    BOOL flag=[_searchAddress reverseGeoCode:option];
-    
-    if (flag) {
-        //        _mapView.showsUserLocation=NO;//不显示自己的位置
-        
-    }
-}
+//- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view{
+//    NSLog(@"点击了");
+//    CLLocationCoordinate2D pt=(CLLocationCoordinate2D){0,0};
+//    pt=(CLLocationCoordinate2D){mapView.region.center.latitude,mapView.region.center.longitude};
+//    BMKReverseGeoCodeOption * option = [[BMKReverseGeoCodeOption alloc]init];
+//    option.reverseGeoPoint = pt;
+//    BOOL flag=[_searchAddress reverseGeoCode:option];
+//
+//    if (flag) {
+//        //        _mapView.showsUserLocation=NO;//不显示自己的位置
+//
+//    }
+//}
 
 
 //地图被拖动的时候，需要时时的渲染界面，当渲染结束的时候我们就去定位然后获取图片对应的经纬度
 
-- (void)mapView:(BMKMapView *)mapView onDrawMapFrame:(BMKMapStatus*)status{
-    NSLog(@"onDrawMapFrame");
-}
+//- (void)mapView:(BMKMapView *)mapView onDrawMapFrame:(BMKMapStatus*)status{
+//    NSLog(@"onDrawMapFrame");
+//}
 
-- (void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    NSLog(@"regionWillChangeAnimated");
-}
+//- (void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
+//    NSLog(@"regionWillChangeAnimated");
+//}
 
 - (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     NSLog(@"regionDidChangeAnimated");
@@ -1302,38 +1284,38 @@
     _mapView.showsUserLocation = YES;//显示定位图层
 }
 
-//点击地图的空白区域
+////点击地图的空白区域
+//
+//- (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate{
+//
+//    NSLog(@"onClickedMapBlank-latitude==%f,longitude==%f",coordinate.latitude,coordinate.longitude);
+//    self.latitudeY = coordinate.latitude;
+//    self.longitudeX = coordinate.longitude;
+//}
 
-- (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate{
-    
-    NSLog(@"onClickedMapBlank-latitude==%f,longitude==%f",coordinate.latitude,coordinate.longitude);
-    self.latitudeY = coordinate.latitude;
-    self.longitudeX = coordinate.longitude;
-}
-
-//点击地图中的背景有标记的区域
-
-- (void)mapView:(BMKMapView *)mapView onClickedMapPoi:(BMKMapPoi *)mapPoi{
-    NSLog(@"点击onClickedMapPoi---%@",mapPoi.text);
-    
-    CLLocationCoordinate2D coordinate = mapPoi.pt;
-    //长按之前删除所有标注
-    NSArray *arrayAnmation=[[NSArray alloc] initWithArray:_mapView.annotations];
-    [_mapView removeAnnotations:arrayAnmation];
-    //设置地图标注
-    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
-    annotation.coordinate = coordinate;
-    annotation.title = mapPoi.text;
-    [_mapView addAnnotation:annotation];
-    BMKReverseGeoCodeOption *re = [[BMKReverseGeoCodeOption alloc] init];
-    re.reverseGeoPoint = coordinate;
-    [SVProgressHUD show];
-    [_searchAddress reverseGeoCode:re];
-    BOOL flag =[_searchAddress reverseGeoCode:re];
-    if (!flag){
-        NSLog(@"search failed!");
-    }
-}
+////点击地图中的背景有标记的区域
+//
+//- (void)mapView:(BMKMapView *)mapView onClickedMapPoi:(BMKMapPoi *)mapPoi{
+//    NSLog(@"点击onClickedMapPoi---%@",mapPoi.text);
+//
+//    CLLocationCoordinate2D coordinate = mapPoi.pt;
+//    //长按之前删除所有标注
+//    NSArray *arrayAnmation=[[NSArray alloc] initWithArray:_mapView.annotations];
+//    [_mapView removeAnnotations:arrayAnmation];
+//    //设置地图标注
+//    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+//    annotation.coordinate = coordinate;
+//    annotation.title = mapPoi.text;
+//    [_mapView addAnnotation:annotation];
+//    BMKReverseGeoCodeOption *re = [[BMKReverseGeoCodeOption alloc] init];
+//    re.reverseGeoPoint = coordinate;
+//    [SVProgressHUD show];
+//    [_searchAddress reverseGeoCode:re];
+//    BOOL flag =[_searchAddress reverseGeoCode:re];
+//    if (!flag){
+//        NSLog(@"search failed!");
+//    }
+//}
 
 //根据经纬度返回点击的位置的名称
 -(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
@@ -1380,9 +1362,9 @@
 
 //点击一个大头针
 
-- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
-    NSLog(@"点击didSelectAnnotationView-");
-}
+//- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
+//    NSLog(@"点击didSelectAnnotationView-");
+//}
 
 /**
  *在地图View将要启动定位时，会调用此函数
@@ -1397,11 +1379,11 @@
  *用户方向更新后，会调用此函数
  *@param userLocation 新的用户位置
  */
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-{
-    [_mapView updateLocationData:userLocation];
-    NSLog(@"heading is %@",userLocation.heading);
-}
+//- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+//{
+//    [_mapView updateLocationData:userLocation];
+//    NSLog(@"heading is %@",userLocation.heading);
+//}
 
 
 /**
@@ -1418,16 +1400,59 @@
  *@param1a  地图View
  *@param error 错误号，参考CLError.h中定义的错误号
  */
-- (void)didFailToLocateUserWithError:(NSError *)error
-{
-    NSLog(@"location error");
+//- (void)didFailToLocateUserWithError:(NSError *)error
+//{
+//    NSLog(@"location error");
+//}
+
+- (BOOL)inputNumber:(NSString *)inputString {
+    if (inputString.length == 0)
+    {
+        [self showInfoWithTitle:@"请输入用工薪酬" autoCloseTime:2];
+        return NO;
+    }
+    if (inputString.length > 4)
+    {
+        [self showInfoWithTitle:@"用工薪酬不得超过4位" autoCloseTime:2];
+        return NO;
+    }
+    if ([inputString integerValue] <= 0)
+    {
+        [self showInfoWithTitle:@"用工薪酬不得为0" autoCloseTime:2];
+        return NO;
+    }
+    NSString *subString12 = [inputString substringToIndex:1];
+    if ([subString12 isEqualToString:@"0"])
+    {
+        [self showInfoWithTitle:@"用工薪酬不得以0开头" autoCloseTime:2];
+        return NO;
+    }
+    return YES;
 }
 
+
 - (BOOL)inputShouldNumber:(NSString *)inputString {
-    if (inputString.length == 0) return NO;
-    NSString *regex =@"[0-9]*";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    return [pred evaluateWithObject:inputString];
+    if (inputString.length == 0)
+    {
+        [self showInfoWithTitle:@"请输入用工人数" autoCloseTime:2];
+        return NO;
+    }
+    if (inputString.length > 3)
+    {
+        [self showInfoWithTitle:@"用工人数不得超过3位数" autoCloseTime:2];
+        return NO;
+    }
+    if ([inputString integerValue] == 0) {
+        [self showInfoWithTitle:@"用工人数不能输入0" autoCloseTime:2];
+        return NO;
+    }
+    NSString *subString12 = [inputString substringToIndex:1];
+    if ([subString12 isEqualToString:@"0"])
+    {
+        [self showInfoWithTitle:@"用工人数不得以0开头" autoCloseTime:2];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)dealloc {

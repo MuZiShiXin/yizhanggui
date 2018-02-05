@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="286.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yg_sy_nr_tp1" translatesAutoresizingMaskIntoConstraints="NO" id="QZ9-qk-jEP">
@@ -100,6 +100,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="力工" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTT-6E-ZmS">
                         <rect key="frame" x="252" y="71" width="31" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="31" id="eHt-B8-gEK"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -196,7 +199,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yg_syfbxz_nr_tb1" translatesAutoresizingMaskIntoConstraints="NO" id="bEx-o1-QMf">
-                        <rect key="frame" x="344" y="156.5" width="22" height="22"/>
+                        <rect key="frame" x="336" y="156.5" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="LtM-Gd-yL9"/>
                             <constraint firstAttribute="height" constant="22" id="g3m-Zo-4kz"/>
@@ -279,6 +282,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="ZhiWeiWidth1" destination="poZ-3l-DVm" id="Bma-uc-6bR"/>
+                <outlet property="ZhiWeiWidth2" destination="qAr-i0-ERV" id="Wpm-mP-AE8"/>
+                <outlet property="ZhiWeiWidth3" destination="ozC-yy-HDe" id="XQk-y9-fbA"/>
+                <outlet property="ZhiWeiWidth4" destination="n5d-Lk-U5P" id="To6-iP-4lk"/>
+                <outlet property="ZhiWeiWidth5" destination="eHt-B8-gEK" id="sp5-Gc-Evi"/>
                 <outlet property="biaotiLabel" destination="CQF-87-lEe" id="EbG-mJ-ABL"/>
                 <outlet property="duiwodepingjiaView" destination="wQx-qR-t5l" id="bli-sv-Efh"/>
                 <outlet property="gonglingLabel" destination="Tpb-Cb-EqV" id="dh8-tx-Cpa"/>

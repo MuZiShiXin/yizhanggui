@@ -286,7 +286,7 @@
         
         NSString *urlStr = [NSString stringWithFormat:@"%@/ZG/liuyan",kPRTURL];
         NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(self.scModel.zhangGuiId),@"liuYanRenId",@(self.scModel.daRenId),@"beiLiuYanRenId",inputString,@"liuYan", nil];
-        [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
+        [BaseHttpTool GET:urlStr params:parameters success:^(id  _Nullable responseObj) {
             NSInteger result = [[responseObj objectForKeyWithNullDetection:@"result"] intValue];
             if (result == 1) {
                 [weakSelf showRightWithTitle:@"留言成功" autoCloseTime:2];

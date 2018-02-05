@@ -32,6 +32,13 @@
 @property (strong, nonatomic) IBOutlet UIImageView *xingxingImageView5;
 @property (strong, nonatomic) IBOutlet UIImageView *zhankaiImageView;
 @property (strong, nonatomic) IBOutlet UILabel *wodepingjiaLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *ZhiWeiWidth1;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *ZhiWeiWidth2;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *ZhiWeiWidth3;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *ZhiWeiWidth4;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *ZhiWeiWidth5;
 
 
 @end
@@ -56,7 +63,7 @@
     
 //    [_duiwodepingjiaView removeFromSuperview];
     
-    [_touxiangImageView sd_setImageWithURL:[NSURL URLWithString:Model.touXiang]];
+    [_touxiangImageView sd_setImageWithURL:[NSURL URLWithString:Model.touXiang] placeholderImage:[UIImage imageNamed:@"yg_sy_nr_tp1"]];
     [_biaotiLabel setText:Model.xingMing];
     if ([Model.xingBie isEqualToString:@"男"]) {
         _xingbieImageVIew.image = [UIImage imageNamed:@"yg_sy_nr_tb2"];
@@ -92,6 +99,9 @@
             _zhiweiLabel1.textAlignment = NSTextAlignmentCenter;
             CGFloat labellingwidth1 = [UILabel getWidthWithTitle:_zhiweiLabel1.text font:_zhiweiLabel1.font];
             _zhiweiLabel1.frame = CGRectMake(CGRectGetMaxX(_touxiangImageView.frame)+11, CGRectGetMaxY(_xingbieImageVIew.frame)+9.5, labellingwidth1+10, 15);
+            self.ZhiWeiWidth1.constant = labellingwidth1+10;
+            
+            
         }else
         {
             [_zhiweiLabel1 removeFromSuperview];
@@ -111,6 +121,8 @@
             _zhiweiLabel2.textAlignment = NSTextAlignmentCenter;
             CGFloat labellingwidth2 = [UILabel getWidthWithTitle:_zhiweiLabel2.text font:_zhiweiLabel2.font];
             _zhiweiLabel2.frame = CGRectMake(CGRectGetMaxX(_touxiangImageView.frame)+5, CGRectGetMaxY(_xingbieImageVIew.frame)+9.5, labellingwidth2+10, 15);
+            self.ZhiWeiWidth2.constant = labellingwidth2+10;
+
         }else
         {
             [_zhiweiLabel2 removeFromSuperview];
@@ -130,6 +142,8 @@
             _zhiweiLabel3.textAlignment = NSTextAlignmentCenter;
             CGFloat labellingwidth3 = [UILabel getWidthWithTitle:_zhiweiLabel3.text font:_zhiweiLabel3.font];
             _zhiweiLabel3.frame = CGRectMake(CGRectGetMaxX(_zhiweiLabel3.frame)+5, CGRectGetMaxY(_xingbieImageVIew.frame)+9.5, labellingwidth3+10, 15);
+            self.ZhiWeiWidth3.constant = labellingwidth3+10;
+
         }else
         {
             [_zhiweiLabel3 removeFromSuperview];
@@ -149,6 +163,8 @@
             _zhiweiLabel4.textAlignment = NSTextAlignmentCenter;
             CGFloat labellingwidth4 = [UILabel getWidthWithTitle:_zhiweiLabel4.text font:_zhiweiLabel4.font];
             _zhiweiLabel4.frame = CGRectMake(CGRectGetMaxX(_zhiweiLabel4.frame)+5, CGRectGetMaxY(_xingbieImageVIew.frame)+9.5, labellingwidth4+10, 15);
+            self.ZhiWeiWidth4.constant = labellingwidth4+10;
+
         }else
         {
             [_zhiweiLabel4 removeFromSuperview];
@@ -168,6 +184,8 @@
             _zhiweiLabel5.textAlignment = NSTextAlignmentCenter;
             CGFloat labellingwidth5 = [UILabel getWidthWithTitle:_zhiweiLabel5.text font:_zhiweiLabel5.font];
             _zhiweiLabel5.frame = CGRectMake(CGRectGetMaxX(_zhiweiLabel5.frame)+5, CGRectGetMaxY(_xingbieImageVIew.frame)+9.5, labellingwidth5+10, 15);
+            self.ZhiWeiWidth5.constant = labellingwidth5+10;
+
         }else
         {
             [_zhiweiLabel5 removeFromSuperview];

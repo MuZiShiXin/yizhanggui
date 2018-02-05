@@ -26,7 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *querenzhifuButton;
 
 @property (nonatomic,strong) XZUnifiedorderModel *UnifiedorderModel;
-
+@property (nonatomic,assign) NSInteger recruitInfoId;
 
 
 

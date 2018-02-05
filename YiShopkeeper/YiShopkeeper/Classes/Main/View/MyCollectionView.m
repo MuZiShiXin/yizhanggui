@@ -21,7 +21,7 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
             btn.enabled = YES;
             CGRect rect = [name boundingRectWithSize:CGSizeMake(self.frame.size.width -20, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil];
-            
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
             CGFloat BtnW = rect.size.width+10;
             CGFloat BtnH = rect.size.height;
             btn.layer.masksToBounds = YES;

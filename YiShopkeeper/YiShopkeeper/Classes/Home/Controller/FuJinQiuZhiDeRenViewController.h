@@ -12,5 +12,9 @@
 @property (strong ,nonatomic) UINavigationController *Navi;
 @property (assign ,nonatomic) NSInteger userDrId;
 @property (assign ,nonatomic) NSInteger userZgId;
+@property (assign ,nonatomic) NSInteger recruitNum; //需要
+@property (assign ,nonatomic) NSInteger appliedPeoNum;//以报
+@property (assign ,nonatomic) NSInteger lastPeoNum;//剩余
+
 //@property (strong ,nonatomic) baomingxinxiModel *model;
 @end

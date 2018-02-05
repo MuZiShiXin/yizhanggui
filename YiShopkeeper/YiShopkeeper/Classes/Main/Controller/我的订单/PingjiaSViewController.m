@@ -126,19 +126,27 @@
 {
     NSString *urlStr = [NSString stringWithFormat:@"%@/Expert/Evaluate/evaluateOfIn",kPRTURL];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: self.pingjieneirongStr,@"evaluateCon",@(self.dingDanId),@"myOrderId",@(1),@"evaluateType", @(self.star1/20),@"punScore",@(self.star2/20),@"skillScore",@(self.star3/20),@"ratioScore",@(self.star4/20),@"quaScore", nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: self.pingjieneirongStr,@"evaluateCon",
+             @(self.dingDanId),@"myOrderId",
+                          @"1",@"evaluateType",
+              @(self.star1),@"punScore",
+              @(self.star2),@"skillScore",
+              @(self.star3),@"ratioScore",
+              @(self.star4),@"quaScore",
+                   nil];
     
     [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];
         if (result == 1) {
             NSString *urlStr = [NSString stringWithFormat:@"%@/Expert/MyOrder/changeTheOrderState",kPRTURL];
-            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(self.dingDanId),@"myOrderId",@(8),@"orderState",@(self.gongDanId),@"recruitInfoId", nil];
+            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(self.dingDanId),@"myOrderId",@(14),@"orderState",@(self.gongDanId),@"recruitInfoId", nil];
             
             [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
                 NSInteger result = [[responseObj valueForKey:@"result"] intValue];
                 if (result == 1) {
                     NSLog(@"成功");
                     [self showRightWithTitle:@"评价成功" autoCloseTime:2];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"TalentShowDetailsViewController" object:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }else if (result == 2)

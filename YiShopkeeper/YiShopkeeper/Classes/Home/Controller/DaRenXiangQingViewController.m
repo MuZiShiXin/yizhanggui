@@ -50,7 +50,6 @@
         }
     } failure:^(NSError * _Nullable error) {
         NSLog(@"loginError:%@",error);
-
     }];
 }
 

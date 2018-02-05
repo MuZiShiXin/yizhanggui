@@ -31,7 +31,7 @@
 }
 
 
-- (UIView *)headView:(gongzuoxinxiModel *)model
+- (UIView *)headView:(gongzuoxinxiModel *)ModelNmb
 {
     if (!_headView) {
         _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
@@ -43,13 +43,13 @@
         UILabel *label = [[UILabel alloc]init];
         NSString *str = @"3";
         if ([str isEqualToString:@"1"]) {
-            label.text = [NSString stringWithFormat:@"需要%ld人  已报",model.recruitNum];
+            label.text = [NSString stringWithFormat:@"需要%ld人  已报",ModelNmb.recruitNum];
         }else if ([str isEqualToString:@"2"])
         {
-            label.text = [NSString stringWithFormat:@"需要%ld人  已到达",model.recruitNum];
+            label.text = [NSString stringWithFormat:@"需要%ld人  已到达",ModelNmb.recruitNum];
         }else
         {
-            label.text = [NSString stringWithFormat:@"需要%ld人  已报",model.recruitNum];
+            label.text = [NSString stringWithFormat:@"需要%ld人  已报",ModelNmb.recruitNum];
         }
         
         label.font = [UIFont systemFontOfSize:13];
@@ -61,7 +61,7 @@
         UILabel *RegistrationNumberLabel = [[UILabel alloc]init];
         RegistrationNumberLabel.textColor = [UIColor redColor];
         RegistrationNumberLabel.font = [UIFont systemFontOfSize:13];
-        RegistrationNumberLabel.text = [NSString stringWithFormat:@"%ld人",model.appliedPeoNum];
+        RegistrationNumberLabel.text = [NSString stringWithFormat:@"%ld人",ModelNmb.appliedPeoNum];
         CGFloat width1 = [UILabel getWidthWithTitle:RegistrationNumberLabel.text font:RegistrationNumberLabel.font];
         RegistrationNumberLabel.frame = CGRectMake(CGRectGetMaxX(label.frame)+5, 16, width1, 13);
         [self addSubview:RegistrationNumberLabel];
@@ -86,7 +86,7 @@
             UILabel *RenNumberLabel = [[UILabel alloc]init];
             RenNumberLabel.textColor = [UIColor redColor];
             RenNumberLabel.font = [UIFont systemFontOfSize:13];
-            RenNumberLabel.text = [NSString stringWithFormat:@"%ld人",model.lastPeoNum];
+            RenNumberLabel.text = [NSString stringWithFormat:@"%ld人",ModelNmb.lastPeoNum];
             CGFloat width3 = [UILabel getWidthWithTitle:RenNumberLabel.text font:RenNumberLabel.font];
             RenNumberLabel.frame = CGRectMake(CGRectGetMaxX(remainingAndacceptance.frame)+5, 16, width3, 13);
             [self addSubview:RenNumberLabel];
@@ -130,9 +130,10 @@
 - (instancetype)initWithFrame:(CGRect)frame GongZuoXinXi:(gongzuoxinxiModel *)Model
 {
     if (self = [super initWithFrame:frame]) {
-        
+        self.Models = Model;
         [self httpRequest:Model];
-        
+        [self headView:Model];
+
     }
     return self;
 }
@@ -146,7 +147,7 @@
 {
     NSString *urlStr = [NSString stringWithFormat:@"%@/ZG/shouye/baomingxinxi",kPRTURL];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(model.recruitInfoId),@"gongDanId",@(1),@"pageNum", nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(model.recruitInfoId),@"gongDanId",@(1),@"pageNum",@(10),@"pageSize", nil];
     
     [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];
@@ -157,9 +158,8 @@
                 self.mode = [HomeModel creatRankingTotalModelWith:resultDic[i]];
                 [self.ModelDic addObject:self.mode];
             }
-            [self headView:model];
-            [self mainTableView];
         }
+        [self mainTableView];
     } failure:^(NSError * _Nullable error) {
         NSLog(@"loginError:%@",error);
     }];
@@ -172,6 +172,9 @@
     NSLog(@"附近求职");
     FuJinQiuZhiDeRenViewController *FuJinQiuZhiDeRenVC = [[FuJinQiuZhiDeRenViewController alloc]init];
     FuJinQiuZhiDeRenVC.Navi = self.Navi;
+    FuJinQiuZhiDeRenVC.recruitNum = self.Models.recruitNum;
+    FuJinQiuZhiDeRenVC.appliedPeoNum = self.Models.appliedPeoNum;
+    FuJinQiuZhiDeRenVC.lastPeoNum = self.Models.lastPeoNum;
     [self.Navi pushViewController:FuJinQiuZhiDeRenVC animated:YES];
 }
 

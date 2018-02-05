@@ -20,6 +20,7 @@
 @property (nonatomic ,assign) double zongJi;
 @property (nonatomic ,assign) NSInteger zhuangTai;
 @property (nonatomic ,assign) NSInteger xiaoShi;
+@property (nonatomic ,assign) NSInteger recruitPayState;
 + (instancetype)creatRankingTotalModelWith:(NSDictionary *)dict;
 
 @end

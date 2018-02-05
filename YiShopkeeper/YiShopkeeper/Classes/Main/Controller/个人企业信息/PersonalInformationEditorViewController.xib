@@ -263,8 +263,8 @@
                                 <constraint firstAttribute="height" constant="1" id="iKY-NY-RLC"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKu-VK-Zy1">
-                            <rect key="frame" x="15" y="443" width="77" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人简介" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKu-VK-Zy1">
+                            <rect key="frame" x="15" y="443" width="62" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="Arl-P8-oDd"/>
                                 <constraint firstAttribute="height" constant="15" id="QjO-SC-u77"/>

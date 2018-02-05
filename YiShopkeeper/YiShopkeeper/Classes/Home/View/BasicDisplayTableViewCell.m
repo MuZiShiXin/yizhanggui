@@ -152,9 +152,9 @@
     _nameLabel.backgroundColor = [UIColor clearColor];
     _nameLabel.font = [UIFont systemFontOfSize:18];
     CGFloat width = [UILabel getWidthWithTitle:_nameLabel.text font:_nameLabel.font];
-    _nameLabel.frame = CGRectMake(CGRectGetMaxX(_headImageView.frame)+11, 16, width, 20);
+    _nameLabel.frame = CGRectMake(CGRectGetMaxX(_headImageView.frame)+10, 16, width, 20);
     
-    _ageLabel.frame = CGRectMake(CGRectGetMaxX(_nameLabel.frame)+7, 20, 40, 15);
+    _ageLabel.frame = CGRectMake(CGRectGetMaxX(_nameLabel.frame), 20, 40, 15);
     _ageLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"f56165"];
     NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%ld岁",(long)dic.nianLing]];
     //获取要调整颜色的文字位置,调整颜色
@@ -318,129 +318,135 @@
         }
 
     }
-    
-    if (dic.neiRong.length != 0) {
-        _lineView.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
-        _lineView.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
-        
-        [_profileLabel setText:dic.neiRong];
-        _profileLabel.frame = CGRectMake(15, CGRectGetMaxY(_lineView.frame)+ 10.5, kScreenWidth-30, 33);
-        _profileLabel.font = [UIFont systemFontOfSize:12];
-        _profileLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"999999"];
-        
-        
-        
-        _lineView1.frame = CGRectMake(15, CGRectGetMaxY(_profileLabel.frame)+14.5, kScreenWidth-15, 1);
-        _lineView1.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
-    }else
-    {
-        _lineView1.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
-        _lineView1.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
-    }
-    
-    
-    _removeButton.frame = CGRectMake(kScreenWidth-190, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
-    
-    switch (dic.dingDanZhuangTai) {
-        case 1:
-        {
-            _removeButton.hidden = NO;
-            [_removeButton setTitle:@"移除" forState:UIControlStateNormal];
-        }
-            break;
-        
-        case 2:
-        {
-            _removeButton.hidden = NO;
-            [_removeButton setTitle:@"未到达" forState:UIControlStateNormal];
-        }
-            break;
-            
-        case 13:
-        {
-            _removeButton.hidden = NO;
-            [_removeButton setTitle:@"未到达" forState:UIControlStateNormal];
-        }
-            break;
-        case 4:
-        {
-//            [_removeButton removeFromSuperview];
-            _removeButton.hidden = YES;
-        }
-            break;
-            
-        case 6:
-        {
-            //            [_removeButton removeFromSuperview];
-            _removeButton.hidden = YES;
-        }
-            break;
-        default:
-            break;
-    }
-    [_removeButton setTitleColor:[UIColor hx_colorWithHexRGBAString:@"999999"] forState:UIControlStateNormal];
-    //设置边框颜色
-    _removeButton.layer.borderColor = [[UIColor hx_colorWithHexRGBAString:@"999999"] CGColor];
-    //设置边框宽度
-    _removeButton.layer.borderWidth = 0.50f;
-    //给按钮设置角的弧度
-    _removeButton.layer.cornerRadius = 4.0f;
-    //设置背景颜色
-    _removeButton.layer.masksToBounds = YES;
-    _removeButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [_removeButton addTarget:self action:@selector(remove:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    _confirmButton.frame = CGRectMake(kScreenWidth-95, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
-    switch (dic.dingDanZhuangTai) {
-        case 1:
-        {
-            [_confirmButton setTitle:@"确定" forState:UIControlStateNormal];
-        }
-            break;
-        
-        case 2:
-        {
-            [_confirmButton setTitle:@"确认到达" forState:UIControlStateNormal];
-        }
-            break;
-            
-        case 13:
-        {
-            [_confirmButton setTitle:@"确认到达" forState:UIControlStateNormal];
-        }
-            break;
-        case 4:
-        {
-            [_confirmButton setTitle:@"验收" forState:UIControlStateNormal];
-        }
-            break;
-        case 6:
-        {
-            [_confirmButton setTitle:@"评价" forState:UIControlStateNormal];
-        }
-            break;
-        default:
-            break;
-    }
-    [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _confirmButton.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"27b8f3"];
-//    //设置边框宽度
-//    _confirmButton.layer.borderWidth = 0.50f;
-    //给按钮设置角的弧度
-    _confirmButton.layer.cornerRadius = 4.0f;
-    //设置背景颜色
-    _confirmButton.layer.masksToBounds = YES;
-    _confirmButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [_confirmButton addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    if (dic.neiRong.length != 0) {
-        _lineView2.frame = CGRectMake(0, 212-5, kScreenWidth, 5);
+    if (self.resultNmb == 2) {
+        _lineView2.frame = CGRectMake(0, CGRectGetMaxY(self.headImageView.frame)+10, kScreenWidth, 5);
         _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
     }else
     {
-        _lineView2.frame = CGRectMake(0, 212-58-5, kScreenWidth, 5);
-        _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
+        if (dic.neiRong.length != 0) {
+            _lineView.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
+            _lineView.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
+            
+            [_profileLabel setText:dic.neiRong];
+            _profileLabel.frame = CGRectMake(15, CGRectGetMaxY(_lineView.frame)+ 10.5, kScreenWidth-30, 33);
+            _profileLabel.font = [UIFont systemFontOfSize:12];
+            _profileLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"999999"];
+            
+            
+            
+            _lineView1.frame = CGRectMake(15, CGRectGetMaxY(_profileLabel.frame)+14.5, kScreenWidth-15, 1);
+            _lineView1.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
+        }else
+        {
+            _lineView1.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
+            _lineView1.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
+        }
+        
+        
+        _removeButton.frame = CGRectMake(kScreenWidth-190, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
+        
+        switch (dic.dingDanZhuangTai) {
+            case 1:
+            {
+                _removeButton.hidden = NO;
+                [_removeButton setTitle:@"移除" forState:UIControlStateNormal];
+            }
+                break;
+                
+            case 2:
+            {
+                _removeButton.hidden = NO;
+                [_removeButton setTitle:@"未到达" forState:UIControlStateNormal];
+            }
+                break;
+                
+            case 13:
+            {
+                _removeButton.hidden = NO;
+                [_removeButton setTitle:@"未到达" forState:UIControlStateNormal];
+            }
+                break;
+            case 4:
+            {
+                //            [_removeButton removeFromSuperview];
+                _removeButton.hidden = YES;
+            }
+                break;
+                
+            case 6:
+            {
+                //            [_removeButton removeFromSuperview];
+                _removeButton.hidden = YES;
+            }
+                break;
+            default:
+                break;
+        }
+        [_removeButton setTitleColor:[UIColor hx_colorWithHexRGBAString:@"999999"] forState:UIControlStateNormal];
+        //设置边框颜色
+        _removeButton.layer.borderColor = [[UIColor hx_colorWithHexRGBAString:@"999999"] CGColor];
+        //设置边框宽度
+        _removeButton.layer.borderWidth = 0.50f;
+        //给按钮设置角的弧度
+        _removeButton.layer.cornerRadius = 4.0f;
+        //设置背景颜色
+        _removeButton.layer.masksToBounds = YES;
+        _removeButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_removeButton addTarget:self action:@selector(remove:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        _confirmButton.frame = CGRectMake(kScreenWidth-95, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
+        switch (dic.dingDanZhuangTai) {
+            case 1:
+            {
+                [_confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+            }
+                break;
+                
+            case 2:
+            {
+                [_confirmButton setTitle:@"确认到达" forState:UIControlStateNormal];
+            }
+                break;
+                
+            case 13:
+            {
+                [_confirmButton setTitle:@"确认到达" forState:UIControlStateNormal];
+            }
+                break;
+            case 4:
+            {
+                [_confirmButton setTitle:@"验收" forState:UIControlStateNormal];
+            }
+                break;
+            case 6:
+            {
+                [_confirmButton setTitle:@"评价" forState:UIControlStateNormal];
+            }
+                break;
+            default:
+                break;
+        }
+        [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _confirmButton.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"27b8f3"];
+        //    //设置边框宽度
+        //    _confirmButton.layer.borderWidth = 0.50f;
+        //给按钮设置角的弧度
+        _confirmButton.layer.cornerRadius = 4.0f;
+        //设置背景颜色
+        _confirmButton.layer.masksToBounds = YES;
+        _confirmButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_confirmButton addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
+        if (dic.neiRong.length != 0) {
+            _lineView2.frame = CGRectMake(0, 212-5, kScreenWidth, 5);
+            _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
+        }else
+        {
+            _lineView2.frame = CGRectMake(0, 212-58-5, kScreenWidth, 5);
+            _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
+        }
     }
+   
     
     
     
@@ -464,7 +470,7 @@
     
     NSString *urlStr = [NSString stringWithFormat:@"%@/ZG/shoucang",kPRTURL];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(self.Homemodel.zhangGuiId),@"zhangGuiId",@(self.Homemodel.daRenId),@"daRenId", nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(Global.userInfoId),@"zhangGuiId",@(self.Homemodel.daRenId),@"daRenId", nil];
     
     [BaseHttpTool GET:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];
@@ -525,15 +531,12 @@
                     NSLog(@"成功");
                     if (orderState == 9) {
                         [weakSelf showRightWithTitle:@"移除成功" autoCloseTime:2];
-
-                        if (weakSelf.block != nil) {
-                            weakSelf.block(weakSelf.HomeIndexPahh);
-                        }
+                        [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
                     }else if(orderState == 12)
                     {
                         [weakSelf showRightWithTitle:@"提交成功" autoCloseTime:2];
+                        [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
                     }
-                    
                 }else if (result == 2)
                 {
                     [weakSelf showInfoWithTitle:@"请勿重复提交" autoCloseTime:2];
@@ -603,24 +606,17 @@
                         NSLog(@"成功");
                         if (orderState == 6) {
                             [weakSelf showRightWithTitle:@"提交成功" autoCloseTime:2];
-
-                            weakSelf.removeButton.hidden = YES;
-                            [weakSelf.confirmButton setTitle:@"评价" forState:UIControlStateNormal];
-                            weakSelf.Homemodel.dingDanZhuangTai = 6;
-                            
+                           [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
                         }else if (orderState == 2)
                         {
                             [weakSelf showRightWithTitle:@"提交成功" autoCloseTime:2];
-
-                            [weakSelf.removeButton setTitle:@"未到达" forState:UIControlStateNormal];
-                            [weakSelf.confirmButton setTitle:@"确认到达" forState:UIControlStateNormal];
-                            weakSelf.Homemodel.dingDanZhuangTai = 2;
+                            [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
+                            
+                            
                         }else if (orderState == 3)
                         {
                             [weakSelf showRightWithTitle:@"提交成功" autoCloseTime:2];
-                            weakSelf.removeButton.hidden = YES;
-                            [weakSelf.confirmButton setTitle:@"验收" forState:UIControlStateNormal];
-                            weakSelf.Homemodel.dingDanZhuangTai = 4;
+                            [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
                         }
                     }else if (result == 2)
                     {

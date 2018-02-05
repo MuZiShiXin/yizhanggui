@@ -13,5 +13,6 @@
 @property (nonatomic ,strong) HomeModel *homeModel;
 @property (nonatomic ,assign) NSInteger dingDanId;
 @property (nonatomic ,assign) NSInteger gongDanId;
+@property (nonatomic ,assign) NSInteger daRenID;
 @property (nonatomic,assign) NSInteger score;
 @end
