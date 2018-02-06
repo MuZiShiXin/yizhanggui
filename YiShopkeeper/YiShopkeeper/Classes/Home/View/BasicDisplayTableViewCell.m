@@ -321,8 +321,31 @@
     if (self.resultNmb == 2) {
         _lineView2.frame = CGRectMake(0, CGRectGetMaxY(self.headImageView.frame)+10, kScreenWidth, 5);
         _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
+        
+        // 线
+        self.lineView.hidden = YES;
+        // 简介
+        self.profileLabel.hidden = YES;
+        // 线
+        self.lineView1.hidden = YES;
+        // 移除
+        self.removeButton.hidden = YES;
+        // 确定
+        self.confirmButton.hidden = YES;
+        
+        
     }else
     {
+        // 线
+        self.lineView.hidden = NO;
+        // 简介
+        self.profileLabel.hidden = NO;
+        // 线
+        self.lineView1.hidden = NO;
+        // 移除
+        self.removeButton.hidden = NO;
+        // 确定
+        self.confirmButton.hidden = NO;
         if (dic.neiRong.length != 0) {
             _lineView.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
             _lineView.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
@@ -591,6 +614,7 @@
                 PingjiaSVC.homeModel = weakSelf.Homemodel;
                 PingjiaSVC.gongDanId = weakSelf.Homemodel.gongDanId;
                 PingjiaSVC.dingDanId = weakSelf.Homemodel.dingDanId;
+                PingjiaSVC.daRenID = weakSelf.Homemodel.daRenId;
                 [weakSelf.Navi pushViewController:PingjiaSVC animated:YES];
             }else
             {

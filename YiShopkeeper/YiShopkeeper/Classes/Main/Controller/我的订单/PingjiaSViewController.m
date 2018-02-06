@@ -129,11 +129,13 @@
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: self.pingjieneirongStr,@"evaluateCon",
              @(self.dingDanId),@"myOrderId",
                           @"1",@"evaluateType",
-              @(self.star1),@"punScore",
-              @(self.star2),@"skillScore",
-              @(self.star3),@"ratioScore",
-              @(self.star4),@"quaScore",
-                   nil];
+              @(self.star1/20),@"punScore",
+              @(self.star2/20),@"skillScore",
+              @(self.star3/20),@"ratioScore",
+              @(self.star4/20),@"quaScore",
+              @(self.daRenID),@"userDrId",
+              @(Global.userInfoId),@"userZgId",
+                                nil];
     
     [BaseHttpTool POST:urlStr params:parameters success:^(id  _Nullable responseObj) {
         NSInteger result = [[responseObj valueForKey:@"result"] intValue];

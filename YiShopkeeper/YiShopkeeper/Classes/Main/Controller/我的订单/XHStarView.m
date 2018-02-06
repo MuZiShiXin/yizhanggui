@@ -91,17 +91,17 @@
 
 - (void)setStarForegroundViewWithPoint:(CGPoint)point{
 
-    self.score = 0;
+    self.score = 1;
     self.score = self.score + [self changeImg:point.x image:self.starOne];
     self.score = self.score + [self changeImg:point.x image:self.starTwo];
     self.score = self.score + [self changeImg:point.x image:self.starThree];
     self.score = self.score + [self changeImg:point.x image:self.starFour];
     self.score = self.score + [self changeImg:point.x image:self.starFive];
 
-    //评论最少半星
-    if(self.score == 0){
+    //评论最少一颗星
+    if(self.score == 1){
         self.score = 20;
-        [self.starOne setImage:[UIImage imageNamed:@"ygdr_sy_nr_tb2"]];
+        [self.starOne setImage:[UIImage imageNamed:@"yg_sy_gdpj_nr_tb2"]];
     }
     NSLog(@"分数 %f",self.score);
     block_(self.score);

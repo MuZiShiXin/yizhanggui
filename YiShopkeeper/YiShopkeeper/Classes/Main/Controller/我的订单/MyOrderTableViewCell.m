@@ -133,6 +133,7 @@
         PingjiaSViewController *PingjiaSVC = [[PingjiaSViewController alloc]init];
         PingjiaSVC.dingDanId = self.models.dingDanId;
         PingjiaSVC.gongDanId = self.models.gongDanId;
+        PingjiaSVC.daRenID = self.models.daRenId;
         [self.Navi pushViewController:PingjiaSVC animated:YES];
     }else if (_zhuangtai == 2 || _zhuangtai == 13) {
         TalentShowDetailsViewController *TalentShowDetailsVC = [[TalentShowDetailsViewController alloc]init];
@@ -164,6 +165,7 @@
         PingjiaSViewController *PingjiaSVC = [[PingjiaSViewController alloc]init];
         PingjiaSVC.dingDanId = self.models.dingDanId;
         PingjiaSVC.gongDanId = self.models.gongDanId;
+        PingjiaSVC.daRenID = self.models.daRenId;
         [self.Navi pushViewController:PingjiaSVC animated:YES];
     }
 }

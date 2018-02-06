@@ -64,7 +64,7 @@
     }];
     __weak __typeof(self) weakSelf = self;
     [contentContactInformationTextView setBlock:^(NSString *str) {
-        [weakSelf httpRequest:str ChanShu:@"jiNeng"];
+        [weakSelf httpRequest:str ChanShu:@"qiYeJianJie"];
     }];
     
     if (self.model != nil) {

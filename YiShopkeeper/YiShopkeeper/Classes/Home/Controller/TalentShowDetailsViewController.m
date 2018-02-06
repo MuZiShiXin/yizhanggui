@@ -434,6 +434,8 @@
                 if (result == 1) {
                     NSLog(@"成功");
                     [weakSelf showRightWithTitle:@"提交成功" autoCloseTime:2];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"TalentShowDetailsViewController" object:nil];
                 }else if (result == 2)
                 {
                     [weakSelf showInfoWithTitle:@"请勿重复提交" autoCloseTime:2];
@@ -483,12 +485,16 @@
                 if (result == 1) {
                     NSLog(@"成功");
                     [weakSelf showRightWithTitle:@"提交成功" autoCloseTime:2];
-                    weakSelf.homeModel.dingDanZhuangTai = 4;
-                    if (weakSelf.block != nil) {
-                        weakSelf.block(@"1");
-                    }
+//                    weakSelf.homeModel.dingDanZhuangTai = 4;
+//                    if (weakSelf.block != nil) {
+//                        weakSelf.block(@"1");
+//                    }
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"HomeViewControllersNotification" object:nil];
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"TalentShowDetailsViewController" object:nil];
                 }else if (result == 2)
+                {
+                    [self showInfoWithTitle:@"请勿重复提交" autoCloseTime:2];
+                }else
                 {
                     [self showInfoWithTitle:@"请勿重复提交" autoCloseTime:2];
                 }

@@ -168,53 +168,58 @@
     _collectLabel.text = @"收藏";
     _collectLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"f56165"];
     _collectLabel.font = [UIFont systemFontOfSize:13];
-    
-    
+
     _labellingView.frame = CGRectMake(CGRectGetMaxX(_headImageView.frame)+11, CGRectGetMaxY(_lengthLabel.frame)+9.5, kScreenWidth - CGRectGetMaxX(_headImageView.frame)-11-15, 15);
     
-    _lineView.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
-    _lineView.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
+    if (Model.neiRong.length == 0) {
+        _confirmButton.frame = CGRectMake(kScreenWidth-95, CGRectGetMaxY(_headImageView.frame)+10, 80, 27);
+        [_confirmButton setTitle:@"留言" forState:UIControlStateNormal];
+        [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _confirmButton.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"27b8f3"];
+        //    //设置边框宽度
+        //    _confirmButton.layer.borderWidth = 0.50f;
+        //给按钮设置角的弧度
+        _confirmButton.layer.cornerRadius = 4.0f;
+        //设置背景颜色
+        _confirmButton.layer.masksToBounds = YES;
+        _confirmButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_confirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+        
+        _lineView2.frame = CGRectMake(0, 212-5, kScreenWidth, 5);
+        _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
+    }else
+    {
+        _lineView.frame = CGRectMake(15, CGRectGetMaxY(_headImageView.frame)+10, kScreenWidth-15, 1);
+        _lineView.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
+        
+        _profileLabel.text = Model.neiRong;
+        _profileLabel.frame = CGRectMake(15, CGRectGetMaxY(_lineView.frame)+ 10.5, kScreenWidth-30, 33);
+        _profileLabel.font = [UIFont systemFontOfSize:12];
+        _profileLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"999999"];
+        
+        
+        
+        _lineView1.frame = CGRectMake(15, CGRectGetMaxY(_profileLabel.frame)+14.5, kScreenWidth-15, 1);
+        _lineView1.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
+        
+        _confirmButton.frame = CGRectMake(kScreenWidth-95, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
+        [_confirmButton setTitle:@"留言" forState:UIControlStateNormal];
+        [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _confirmButton.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"27b8f3"];
+        //    //设置边框宽度
+        //    _confirmButton.layer.borderWidth = 0.50f;
+        //给按钮设置角的弧度
+        _confirmButton.layer.cornerRadius = 4.0f;
+        //设置背景颜色
+        _confirmButton.layer.masksToBounds = YES;
+        _confirmButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_confirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+        
+        _lineView2.frame = CGRectMake(0, 212-5, kScreenWidth, 5);
+        _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
+    }
     
-    _profileLabel.text = Model.neiRong;
-    _profileLabel.frame = CGRectMake(15, CGRectGetMaxY(_lineView.frame)+ 10.5, kScreenWidth-30, 33);
-    _profileLabel.font = [UIFont systemFontOfSize:12];
-    _profileLabel.textColor = [UIColor hx_colorWithHexRGBAString:@"999999"];
     
-    
-    
-    _lineView1.frame = CGRectMake(15, CGRectGetMaxY(_profileLabel.frame)+14.5, kScreenWidth-15, 1);
-    _lineView1.backgroundColor = [UIColor hx_colorWithHexRGBAString:kBeijingColor];
-//    
-//    _removeButton.frame = CGRectMake(kScreenWidth-190, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
-//    [_removeButton setTitle:@"移除" forState:UIControlStateNormal];
-//    [_removeButton setTitleColor:[UIColor hx_colorWithHexRGBAString:@"999999"] forState:UIControlStateNormal];
-//    //设置边框颜色
-//    _removeButton.layer.borderColor = [[UIColor hx_colorWithHexRGBAString:@"999999"] CGColor];
-//    //设置边框宽度
-//    _removeButton.layer.borderWidth = 0.50f;
-//    //给按钮设置角的弧度
-//    _removeButton.layer.cornerRadius = 4.0f;
-//    //设置背景颜色
-//    _removeButton.layer.masksToBounds = YES;
-//    _removeButton.titleLabel.font = [UIFont systemFontOfSize:15];
-//    [_removeButton addTarget:self action:@selector(remove) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    _confirmButton.frame = CGRectMake(kScreenWidth-95, CGRectGetMaxY(_lineView1.frame)+10, 80, 27);
-    [_confirmButton setTitle:@"留言" forState:UIControlStateNormal];
-    [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _confirmButton.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"27b8f3"];
-    //    //设置边框宽度
-    //    _confirmButton.layer.borderWidth = 0.50f;
-    //给按钮设置角的弧度
-    _confirmButton.layer.cornerRadius = 4.0f;
-    //设置背景颜色
-    _confirmButton.layer.masksToBounds = YES;
-    _confirmButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [_confirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
-    
-    _lineView2.frame = CGRectMake(0, 212-5, kScreenWidth, 5);
-    _lineView2.backgroundColor = [UIColor hx_colorWithHexRGBAString:@"eef1f6"];
     
     
 }

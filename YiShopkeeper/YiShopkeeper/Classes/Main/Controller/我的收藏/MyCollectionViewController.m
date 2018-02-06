@@ -162,8 +162,19 @@
 }
 
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    if (self.ModelDic.count != 0) {
+        if ([self.ModelDic[indexPath.row] neiRong].length  == 0) {
+            return 212-86;
+
+        }else
+        {
+            return 212;
+        }
+    }else
+    {
+        return 0;
+    }
     
-    return 212;
     
 }
 

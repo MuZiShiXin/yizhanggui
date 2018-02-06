@@ -27,7 +27,7 @@
 @property (nonatomic ,assign) NSInteger checkState;//审核状态（0否1是）
 @property (nonatomic ,assign) NSInteger wanShanXinXi;//完善信息（0否1是）
 @property (nonatomic ,assign) NSInteger zhuXiao;//是否已注销（0否1是）
-
+@property (nonatomic ,strong) NSString  *idPicInfo;
 + (instancetype)creatRankingTotalModelWith:(NSDictionary *)dict;
 
 @end

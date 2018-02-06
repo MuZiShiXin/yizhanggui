@@ -122,7 +122,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    [tableView tableViewDisplayWitMsg:@"暂无工单" ifNecessaryForRowCount:_ModelDic.count];
+    [tableView tableViewDisplayWitMsg:@"暂无评价" ifNecessaryForRowCount:_ModelDic.count];
     return self.ModelDic.count;
 }
 

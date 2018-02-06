@@ -75,7 +75,8 @@ static NSString * const cell2ID = @"cell2ID";
     CLLocationCoordinate2D centerCoordinate = mapView.region.center;
     region.center = centerCoordinate;
     NSLog(@" regionDidChangeAnimated %f,%f",centerCoordinate.latitude, centerCoordinate.longitude);
-    
+    self.longitudeX = centerCoordinate.longitude;
+    self.latitudeY = centerCoordinate.latitude;
     //发起反向地理编码检索
     BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
     reverseGeoCodeSearchOption.reverseGeoPoint = region.center;
@@ -97,6 +98,7 @@ static NSString * const cell2ID = @"cell2ID";
 {
     Btn.userInteractionEnabled = NO;
     NSString *urlStr = [NSString stringWithFormat:@"%@/ZG/dizhi/modify",kPRTURL];
+    self.GetAddress = [NSString stringWithFormat:@"%@%@",self.dataList[_selectIndex.row].name,self.dataList[_selectIndex.row].address];
     if (self.GetAddress.length != 0 && self.latitudeY !=0 && self.longitudeX !=0){
         NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:@(Global.userInfoId),@"userInfoId",self.GetAddress,@"diZhi",@(self.latitudeY),@"Y",@(self.longitudeX),@"X",nil];
 
@@ -113,6 +115,9 @@ static NSString * const cell2ID = @"cell2ID";
             NSLog(@"loginError:%@",error);
             Btn.userInteractionEnabled = YES;
         }];
+    }else
+    {
+        Btn.userInteractionEnabled = YES;
     }
 }
 
